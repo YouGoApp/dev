@@ -1,0 +1,6 @@
+MAKE SURE TO INSTALL BRACKET EXCLUDE NODE_MODULES BEFORE OPENING THE FILES!!
+
+Folder structures:
+- App.js = Main frame for the app
+- pages Folder = Folder for each app section
+- assets Folder = Folder for all assets, this includes images, logos, and any other graphic designs
