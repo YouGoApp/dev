@@ -4,10 +4,14 @@ import { StyleSheet, Text, View, Button, Linking} from 'react-native';
 export default class Login extends React.Component {
   
 	state={
-		facebook: null,
-		google: null
+		facebook: '',
+		google: ''
 	}
 	
+	handleFacebook=()=> {
+		this.props.navigation.navigate('Preference')
+	}
+
 	render() {
     return (
       <View style={styles.container}>
@@ -15,7 +19,7 @@ export default class Login extends React.Component {
 				<View style={{width: 250, backgroundColor: "#45d8d5"}}>
 					<Button 
 						title="SIGN IN WITH FACEBOOK"
-						onPress={this.state.facebook}
+						onPress={this.handleFacebook}
 						color="#45d8d5"
 						/>
 				</View>
@@ -38,7 +42,7 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
 		width: 350,

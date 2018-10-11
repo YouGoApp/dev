@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1a2e35',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
 		padding: 10,
   },
 	logo: {
