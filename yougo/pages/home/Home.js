@@ -1,9 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+//import { connect } from 'react-redux';
+import { ChangePage } from '.././redux/action';
+
 export default class Home extends React.Component {
-  render() {
-    return (
+  
+	handlePage=(page)=>{
+		this.props.dispatch(ChangePage(page));
+	}
+	
+	render() {
+    
+		var curpage = <Preference />
+				
+		switch (this.props.page){
+			case 1:
+				curpage = <Preference />
+				break;
+			
+			case 2:
+				curpage: <Activity />
+				break;
+		}
+		
+		return (
       <View style={styles.container}>
         
       </View>

@@ -5,9 +5,9 @@ export default class Loading extends React.Component {
 	
 	componentWillMount()
 	{
-		setInterval(()=>{
+		setTimeout(()=>{
 			this.props.navigation.navigate('Login');
-		}, 1500)
+		}, 1200)
 	}
 	
 	render() {

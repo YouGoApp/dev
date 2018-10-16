@@ -14,5 +14,6 @@ export default createSwitchNavigator ({
 	Activity: Activity,
 	Preference: Preference,
 	Home: Home,
-	
+	Map: Map,
+	Event: Event,
 });

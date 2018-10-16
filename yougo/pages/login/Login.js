@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Linking, TouchableOpacity, } from 'react-native';
+import Preference from '.././preference/Preference';
 
 export default class Login extends React.Component {
   
 	state={
-		facebook: '',
-		google: ''
+		facebook: Preference,
+		google: Preference
 	}
 	
 	handleFacebook=()=> {
@@ -13,7 +14,7 @@ export default class Login extends React.Component {
 	}
 	
 	handleGoogle=()=>{
-		alert("This is working, I think, Hopefully, Love you Henry, Help us PLEASE");
+		alert("This is working, I think, Hopefully....");
 	}
 	
 	render() {
