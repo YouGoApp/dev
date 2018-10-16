@@ -2,10 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View, Animated, Image, ProgressBarAndroid } from 'react-native';
 
 export default class Loading extends React.Component {
-  render() {
+	
+	componentWillMount()
+	{
+		setInterval(()=>{
+			this.props.navigation.navigate('Login');
+		}, 1500)
+	}
+	
+	render() {
     return (
-      <View stye={styles.loading}>
-        <Image
+			<View stye={styles.loading}>
+				<Image
 					style={styles.logo}
 					source={require('../.././assets/logo/PNG/logo03_COLOR_C.png')}
 					/>
@@ -13,7 +21,7 @@ export default class Loading extends React.Component {
 					styleAttr='Large'
 					color='#45d8d5'
 					/>
-      </View>
+			</View>			
     );
   }
 }

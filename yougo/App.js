@@ -8,36 +8,16 @@ import Map from './pages/map/Map';
 import Preference from './pages/preference/Preference';
 import Setting from './pages/setting/Setting';
 import Loading from './pages/loading/Loading';
-import { createStackNavigator, } from 'react-navigation';
+import Navigation from './pages/navigation/Navigation';
 //
 //export default Navigator;
 
 export default class App extends React.Component {
 	
-	constructor() {
-		super()
-		this.state = {
-			showLogin: true
-		}
-	}
-	
-	componentWillMount() {
-		setTimeout(() => {
-			this.setState({
-				showLogin: false
-			})
-		},
-			1000)
-	}
-	
 	render() {
 		return (
       <View style={styles.container}>
-				{
-					this.state.showLogin ?
-						<Loading />:
-						<Login />
-				}
+				<Navigation />
       </View>
     );
   }
