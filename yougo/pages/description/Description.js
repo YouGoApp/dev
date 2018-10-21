@@ -21,7 +21,7 @@ export default class Description extends React.Component {
 				</View>
 				
 				<View style={styles.body}>
-						<Text style={styles.prefTitle}>Description</Text>
+						<Text style={styles.prefTitle}>Descriptions</Text>
 					</View>
 				
       </View>
