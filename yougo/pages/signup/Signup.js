@@ -1,20 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Linking, TouchableOpacity, TextInput } from 'react-native';
 import Preference from '.././preference/Preference';
+import Login from '.././login/Login';
 
-export default class Login extends React.Component {
-  
-	state={
-		facebook: Preference,
-		google: Preference
-	}
-
-	handleFacebook=()=> {
+export default class Signup extends React.Component {
+  	
+	onSignUp=()=>{
 		this.props.navigation.navigate('Preference')
 	}
 	
-	handleGoogle=()=>{
-		alert("This button is pressable");
+	handleCancel=()=>{
+		this.props.navigation.navigate('Login')
 	}
 	
 	render() {
@@ -24,7 +20,7 @@ export default class Login extends React.Component {
 				
 				<View style={styles.whitebox}>
 					
-					<Text style={{marginBottom: 35, fontSize: 23, fontWeight: "bold"}}>Sign in to your account</Text>
+					<Text style={{marginBottom: 35, fontSize: 25, fontWeight: "bold"}}>Sign Up</Text>
 					
 					<TextInput 
 						style={styles.input}
@@ -32,6 +28,7 @@ export default class Login extends React.Component {
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
+						maxLength={10}
 						/>
 					
 					<TextInput 
@@ -40,44 +37,49 @@ export default class Login extends React.Component {
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
+						maxLength={10}
+						onChangeText={password => this.setState({ password })}
+						secureTextEntry={true}
+						/>
+					
+					<TextInput 
+						style={styles.input}
+						placeholder="Email"
+						placeholderTextColor="grey"
+						autoCapitalize="none"
+						underlineColorAndroid="transparent"
+						maxLength={100}
+						onChangeText={email => this.setState({ email })}
+						/>
+					
+					<TextInput 
+						style={styles.input}
+						placeholder="City"
+						placeholderTextColor="grey"
+						autoCapitalize="none"
+						underlineColorAndroid="transparent"
+						maxLength={20}
 						/>
 					
 					<View style={styles.button}>
 						<Button 
-							title="LOG IN"
-							onPress={this.handleFacebook}
-							color="#45d8d5"
-							/>
-					</View>
-					
-					<View style={{marginBottom: 20, flexDirection: "row"}}>
-						<Text>Don't have an account? </Text>
-						<TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-							<Text style={{color: "#45d8d5", fontWeight: "bold"}}>Sign Up</Text>
-						</TouchableOpacity>
-					</View>
-					
-					<Text style={{marginBottom: 20}}>----------------------        OR        ----------------------</Text>
-					
-					<View style={styles.button}>
-						<Button 
-							title="SIGN IN WITH FACEBOOK"
-							onPress={this.handleFacebook}
+							title="SIGN UP"
+							onPress={this.onSignUp}
 							color="#45d8d5"
 							/>
 					</View>
 					
 					<View style={styles.button}>
 						<Button 
-						title="SIGN IN WITH GOOGLE"
-						onPress={this.handleGoogle}
-						color="#45d8d5"
-						/>
+							title="CANCEL"
+							onPress={this.handleCancel}
+							color="#45d8d5"
+							/>
 					</View>
+													
+					<Text style={{fontSize: 16}}>By signing in, I agree to YouGo</Text>
 					
-					<Text>By signing in, I agree to YouGo</Text>
-					
-					<Text>
+					<Text style={{fontSize: 16}}>
 						<Text onPress={() => Linking.openURL('https://www.google.com')} style={{color: '#45d8d5'}}>Privacy Policy</Text> and <Text onPress={() => Linking.openURL('https://www.google.com')} style={{color: '#45d8d5'}}>Terms of Service</Text>
 					</Text>	
 				
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: 325,
-		height: 600,
+		height: 500,
 	},
 	input: {
 		marginBottom: 20,

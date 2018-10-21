@@ -7,6 +7,9 @@ import Event from '.././event/Event';
 import Setting from '.././setting/Setting';
 import Home from '.././home/Home';
 import Activity from '.././activity/Activity';
+import Signup from '.././signup/Signup';
+import Recommendation from '.././recommendation/Recommendation';
+import Description from '.././description/Description';
 
 export default createSwitchNavigator ({
   Loading: Loading,
@@ -16,4 +19,7 @@ export default createSwitchNavigator ({
 	Home: Home,
 	Map: Map,
 	Event: Event,
+	Signup: Signup,
+	Recommendation: Recommendation,
+	Description: Description,
 });

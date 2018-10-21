@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
 	{
 		setTimeout(()=>{
 			this.props.navigation.navigate('Login');
-		}, 1200)
+		}, 500)
 	}
 	
 	render() {
