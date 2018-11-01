@@ -57,7 +57,7 @@ export default class Activity extends React.Component {
 								source={require('../.././assets/imgs/concert.jpg')}
 								style={styles.image}
 								/>
-							<Text style={styles.selectionText}>Concerts</Text>
+							<Text style={styles.selectionText}>Indoor Activities</Text>
 						</TouchableOpacity>
 					</View>
 
@@ -75,7 +75,7 @@ export default class Activity extends React.Component {
 								source={require('../.././assets/imgs/outdoor.jpg')}
 								style={{width: 180, height: 180}}
 								/>
-							<Text style={styles.selectionText}>Outdoor</Text>
+							<Text style={styles.selectionText}>Outdoor Activities</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
