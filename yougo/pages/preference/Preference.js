@@ -2,18 +2,17 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Picker, Dimensions } from 'react-native';
 import Activity from '.././activity/Activity';
 
-export default class Preference extends React.Component {
+import { connect } from 'react-redux';
+import { ChangePeople } from '.././redux/action';
+
+class Preference extends React.Component {
  	
-	state = {
-		Activity: '',
+	handlePeople=(text)=>{
+		this.props.dispatch(ChangePeople(text));
 	}
 	
-	updateActivity = (Activity) => {
-		this.setState({Activity: Activity})
-	}
-
-	handleActivity=()=>{
-		this.props.navigation.navigate('Activity')
+	handleContinue=()=>{
+		this.props.navigation.navigate('Activity');
 	}
 	
 	render() {
@@ -24,22 +23,20 @@ export default class Preference extends React.Component {
 				</View>
 				
 				<View style={styles.body}>
-					<Text style={styles.prefTitle}>Let's find your locations</Text>
-				
-					<Text style={styles.prefSubTit}>We can personalized your result based on your location</Text>
-
-					<Text style={{marginBottom: 20}}>-----------------------------------</Text>
+					<Text style={styles.prefTitle}>How many people are in your group?</Text>
 
 					<TextInput
 						style={styles.input}
-						placeholder="Postal Code"
+						placeholder=""
 						placeholderTextColor="white"
 						autoCapitalize="none"
 						underlineColorAndroid='transparent'
-						maxLength={6}
+						maxLength={2}
+						keyboardType='numeric'
+						onChangeText={this.handlePeople}
 						/>
 
-					<TouchableOpacity style={styles.button} onPress={this.handleActivity}>
+					<TouchableOpacity style={styles.button} onPress={this.handleContinue}>
 						<Text style={{alignItems: "center", justifyContent: "center", color: "white", fontWeight: "bold"}}>
 							CONTINUE
 						</Text>
@@ -50,6 +47,14 @@ export default class Preference extends React.Component {
     );
   }
 }
+
+function grabVar(state){
+	return {
+		numPeople: state.Page.numPeople
+	}
+}
+
+export default connect(grabVar)(Preference);
 
 const styles = StyleSheet.create({
   container: {
@@ -74,17 +79,12 @@ const styles = StyleSheet.create({
 	prefTitle: {
 		color: '#1a2e35',
 		fontWeight: '500',
-		fontSize: 30,
-		marginBottom: 20,
-	},
-	prefSubTit: {
-		color: '#1a2e35',
-		fontSize: 15,
-		marginBottom: 20,
+		fontSize: 23,
+		marginBottom: 30,
 	},
 	input: {
-		marginBottom: 20,
-		width: 250,
+		marginBottom: 30,
+		width: 100,
 		height: 50,
 		borderColor: '#45d8d5',
 		borderWidth: 1,

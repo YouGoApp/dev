@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
 	{
 		setTimeout(()=>{
 			this.props.navigation.navigate('Login');
-		}, 500)
+		}, 5)
 	}
 	
 	render() {
@@ -21,18 +21,19 @@ export default class Loading extends React.Component {
 					styleAttr='Large'
 					color='#45d8d5'
 					/>
-			</View>			
+			</View>	
     );
   }
 }
 
 const styles = StyleSheet.create({
   loading: {
-    flex: 1,
+		flex: 1,
     backgroundColor: '#1a2e35',
     alignItems: 'center',
     justifyContent: 'center',
 		padding: 10,
+		height: '100%',
   },
 	logo: {
 		alignItems: 'center',

@@ -1,6 +1,20 @@
 export function ChangePage(page){
 	return{
 		type:"CHANGE_PAGE",
-		curpage:page
+		page:page
+	}
+}
+
+export function ChangePeople(numPeople){
+	return{
+		type:"CHANGE_PEOPLE",
+		numPeople:numPeople
+	}
+}
+
+export function ChangeList(listRest){
+	return{
+		type:"CHANGE_LIST",
+		listRest:listRest
 	}
 }

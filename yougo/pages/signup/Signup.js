@@ -5,12 +5,32 @@ import Login from '.././login/Login';
 
 export default class Signup extends React.Component {
   	
-	onSignUp=()=>{
+	handleSignUp=()=>{
 		this.props.navigation.navigate('Preference')
 	}
 	
 	handleCancel=()=>{
 		this.props.navigation.navigate('Login')
+	}
+	
+	handleUsername=(text)=>{
+		
+	}
+	
+	handlePassword=(text)=>{
+		password => this.setState({
+			password
+		})
+	}
+	
+	handleEmail=(text)=>{
+		email => this.setState({ 
+			email 
+		})
+	}
+	
+	handleCity=(text)=>{
+		
 	}
 	
 	render() {
@@ -29,6 +49,7 @@ export default class Signup extends React.Component {
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
 						maxLength={10}
+						onChangeText={this.handleUsername}
 						/>
 					
 					<TextInput 
@@ -38,7 +59,7 @@ export default class Signup extends React.Component {
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
 						maxLength={10}
-						onChangeText={password => this.setState({ password })}
+						onChangeText={this.handlePassword}
 						secureTextEntry={true}
 						/>
 					
@@ -49,7 +70,7 @@ export default class Signup extends React.Component {
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
 						maxLength={100}
-						onChangeText={email => this.setState({ email })}
+						onChangeText={this.handleEmail}
 						/>
 					
 					<TextInput 
@@ -59,12 +80,13 @@ export default class Signup extends React.Component {
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
 						maxLength={20}
+						onChangeText={this.handleCity}
 						/>
 					
 					<View style={styles.button}>
 						<Button 
 							title="SIGN UP"
-							onPress={this.onSignUp}
+							onPress={this.handleSignUp}
 							color="#45d8d5"
 							/>
 					</View>

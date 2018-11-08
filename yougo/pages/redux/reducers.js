@@ -1,5 +1,7 @@
 const pageDefault = {
-	page: 1
+	page: 1,
+	numPeople: "",
+	listRest: ""
 };
 
 export function Page(state = pageDefault, action){
@@ -7,7 +9,15 @@ export function Page(state = pageDefault, action){
 	
 	switch(action.type){
 		case "CHANGE_PAGE":
-			obj.page = action.curpage;
+			obj.page = action.page;
+			return obj;
+			
+		case "CHANGE_PEOPLE":
+			obj.numPeople = action.numPeople;
+			return obj;
+			
+		case "CHANGE_LIST":
+			obj.listRest = action.listRest;
 			return obj;
 			
 		default:

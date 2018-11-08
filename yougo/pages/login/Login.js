@@ -1,22 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Linking, TouchableOpacity, TextInput } from 'react-native';
 import Preference from '.././preference/Preference';
+import Signup from '.././signup/Signup';
 
 export default class Login extends React.Component {
-  
-	state={
-		facebook: Preference,
-		google: Preference
+	
+	handleLogin=()=>{
+		this.props.navigation.navigate('Preference');
 	}
 
-	handleFacebook=()=> {
-		this.props.navigation.navigate('Preference')
-	}
-	
-	handleGoogle=()=>{
-		alert("This button is pressable");
-	}
-	
 	render() {
     return (
       
@@ -45,7 +37,7 @@ export default class Login extends React.Component {
 					<View style={styles.button}>
 						<Button 
 							title="LOG IN"
-							onPress={this.handleFacebook}
+							onPress={this.handleLogin}
 							color="#45d8d5"
 							/>
 					</View>
@@ -56,25 +48,7 @@ export default class Login extends React.Component {
 							<Text style={{color: "#45d8d5", fontWeight: "bold"}}>Sign Up</Text>
 						</TouchableOpacity>
 					</View>
-					
-					<Text style={{marginBottom: 20}}>----------------------        OR        ----------------------</Text>
-					
-					<View style={styles.button}>
-						<Button 
-							title="SIGN IN WITH FACEBOOK"
-							onPress={this.handleFacebook}
-							color="#45d8d5"
-							/>
-					</View>
-					
-					<View style={styles.button}>
-						<Button 
-						title="SIGN IN WITH GOOGLE"
-						onPress={this.handleGoogle}
-						color="#45d8d5"
-						/>
-					</View>
-					
+									
 					<Text>By signing in, I agree to YouGo</Text>
 					
 					<Text>
@@ -100,7 +74,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: 325,
-		height: 600,
+		height: 400,
 	},
 	input: {
 		marginBottom: 20,
