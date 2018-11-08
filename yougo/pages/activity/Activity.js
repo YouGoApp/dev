@@ -48,11 +48,11 @@ class Activity extends React.Component {
 		
 	}
 		
-	handleRecommendation=()=>{
+	handleContinue=()=>{
 		this.props.navigation.navigate('Recommendation')
 	}
 	
-	handlePreference=()=>{
+	handleBack=()=>{
 		this.props.navigation.navigate('Preference')
 	}
 	
@@ -62,7 +62,7 @@ class Activity extends React.Component {
 			
 			<View style={styles.container}>
 				<View style={styles.header}>
-					<TouchableOpacity onPress={this.handlePreference}>
+					<TouchableOpacity onPress={this.handleBack}>
 						<Image
 							source={require('../.././assets/icon/left_arrow.png')}
 							style={{width: 25, height: 25}}

@@ -1,7 +1,8 @@
 const pageDefault = {
 	page: 1,
 	numPeople: "",
-	listRest: ""
+	listRest: "",
+	distance: ""
 };
 
 export function Page(state = pageDefault, action){
@@ -18,6 +19,10 @@ export function Page(state = pageDefault, action){
 			
 		case "CHANGE_LIST":
 			obj.listRest = action.listRest;
+			return obj;
+			
+		case "CHANGE_DISTANCE":
+			obj.distance = action.distance;
 			return obj;
 			
 		default:

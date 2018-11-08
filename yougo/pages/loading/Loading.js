@@ -12,7 +12,7 @@ export default class Loading extends React.Component {
 	
 	render() {
     return (
-			<View stye={styles.loading}>
+			<View style={styles.loading}>
 				<Image
 					style={styles.logo}
 					source={require('../.././assets/logo/PNG/logo03_COLOR_C.png')}

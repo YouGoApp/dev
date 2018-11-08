@@ -27,12 +27,13 @@ class Preference extends React.Component {
 
 					<TextInput
 						style={styles.input}
-						placeholder=""
-						placeholderTextColor="white"
+						placeholder="No. of People"
+						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid='transparent'
 						maxLength={2}
 						keyboardType='numeric'
+						textContentType='none'
 						onChangeText={this.handlePeople}
 						/>
 
@@ -84,11 +85,11 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		marginBottom: 30,
-		width: 100,
+		width: 125,
 		height: 50,
 		borderColor: '#45d8d5',
 		borderWidth: 1,
-		backgroundColor: '#45d8d5',
+		backgroundColor: 'white',
 		paddingRight: 20,
 		paddingLeft: 20,
 		paddingTop: 5,

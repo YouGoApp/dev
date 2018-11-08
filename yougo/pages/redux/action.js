@@ -18,3 +18,10 @@ export function ChangeList(listRest){
 		listRest:listRest
 	}
 }
+
+export function ChangeDistance(distance){
+	return{
+		type:"CHANGE_DISTANCE",
+		distance:distance
+	}
+}
