@@ -18,15 +18,15 @@ export default class Recommendation extends React.Component {
 						/>
 					
 					<View style={{paddingLeft: 15}}>
-						<View>
-							<Text>Restaurant Name</Text>
+						<View style={{paddingBottom: 17}}>
+							<Text style={{fontWeight: 'bold'}}>Restaurant Name</Text>
 						</View>
 
-						<View>
+						<View style={{paddingBottom: 17}}>
 							<Text>$$$$</Text>
 						</View>
 
-						<View>
+						<View style={{paddingBottom: 17}}>
 							<Text>4.0/5.0</Text>
 						</View>
 

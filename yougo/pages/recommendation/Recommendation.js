@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider, ScrollView } from 'react-native';
 
 import Activity from '.././activity/Activity';
 import Description from '.././description/Description';
@@ -80,8 +80,18 @@ export default class Recommendation extends React.Component {
 							style={styles.distanceSlider}
 							/>
 					</View>
-					<RecomRest />
 					
+					<ScrollView>
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+						<RecomRest />
+					</ScrollView>
+						
 				</View>
 					
       </View>
