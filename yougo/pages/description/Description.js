@@ -1,33 +1,86 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import Recommendation from '.././recommendation/Recommendation';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import ImageSlider from 'react-native-image-slider';
 
-export default class Description extends React.Component {
+import { connect } from 'react-redux';
+import { ChangePage, ChangeList } from '.././redux/action';
+
+import Recommendation from '.././recommendation/Recommendation';
+import Profile from '.././profile/Profile';
+
+class Description extends React.Component {
 	
-	handleRecommendation=()=>{
+	handleBack=()=>{
 		this.props.navigation.navigate('Recommendation')
 	}
 	
+	handleMap=()=>{
+		alert("This will go to Google Map. Later.")
+	}
+	
 	render() {
+		
+		const restImg = [
+			'../.././assets/imgs/eat.jpeg',
+			'../.././assets/imgs/miku.jpg',
+			'../.././assets/imgs/nightlife.jpg'
+		];
+		
 		return (
       <View style={styles.container}>
 				<View style={styles.header}>
-					<TouchableOpacity onPress={this.handleRecommendation}>
-						<Image
-							source={require('../.././assets/icon/left_arrow.png')}
-							style={{width: 25, height: 25}}
-							/>
-					</TouchableOpacity>
+					<View>
+						<TouchableOpacity onPress={this.handleBack}>
+							<Image
+								source={require('../.././assets/icon/left_arrow.png')}
+								style={{width: 25, height: 25}}
+								/>
+						</TouchableOpacity>
+					</View>
 				</View>
 				
 				<View style={styles.body}>
-						<Text style={styles.prefTitle}>Descriptions</Text>
+					<View style={styles.imgSlider}>
+						<ImageSlider
+							images={
+								[
+									'http://d3pah2c10lnl36.cloudfront.net/images/menu_detail_lunch_01_.jpg',
+									'http://d3pah2c10lnl36.cloudfront.net/images/menu_detail_bbq_01.jpg'
+								]
+							}
+							/>
 					</View>
+					<ScrollView>
+						<Text style={styles.prefTitle}>Restaurant Name Here</Text>
+						<Text style={styles.subTitle}>Street Name Here</Text>
+						<Text style={styles.subTitle}>Phone Number Here</Text>
+						<Text style={styles.subTitle}>Email Here</Text>
+						<Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec accumsan purus, quis condimentum erat. Quisque sed metus libero. Sed gravida mauris id arcu hendrerit rhoncus. Proin pellentesque ex nec ultricies gravida. Sed vel erat in velit dictum aliquet. Suspendisse varius justo ac consectetur ultrices. Duis mollis in neque eu aliquam. In maximus mi vitae odio condimentum, in venenatis dui malesuada. Aenean nunc neque, varius et odio vitae, ullamcorper placerat neque. Etiam malesuada accumsan orci, ut tristique nulla volutpat nec.</Text>
+					</ScrollView>
+				</View>
 				
-      </View>
+				<View style={styles.footer}>
+					<View>
+						<TouchableOpacity onPress={this.handleMap}>
+							<Text style={styles.CTA}>Get Directions</Text>
+						</TouchableOpacity>
+					</View>
+					
+				</View>
+				
+			</View>
     );
   }
 }
+
+function grabVar(state){
+	return {
+		mainPage: state.Page.page,
+		mainList: state.Page.listRest
+	}
+}
+
+export default connect(grabVar)(Description);
 
 const styles = StyleSheet.create({
   container: {
@@ -42,23 +95,50 @@ const styles = StyleSheet.create({
 		backgroundColor: '#ffffff',
 		width: '100%',
 		height: '90%',
-		justifyContent: 'center',
-		alignItems: 'center',
+	},
+	imgSlider: {
+		width: '100%',
+		height: 300,
 	},
 	prefTitle: {
 		color: '#1a2e35',
 		fontWeight: '500',
 		fontSize: 28,
-		marginBottom: 20,
+		paddingBottom: 15,
+		paddingLeft: 15,
+		paddingTop: 10,
+	},
+	subTitle:{
+		color: '#1a2e35',
+		fontSize: 18,
+		paddingBottom: 15,
+		paddingLeft: 15,
+		paddingTop: 10,
+	},
+	CTA: {
+		color: '#fff',
+		fontWeight: '500',
+		fontSize: 28,
+		paddingLeft: 110,
+		paddingTop: 10,
 	},
 	header: {
+		flexDirection:'row',
 		backgroundColor: "#1a2e35",
 		width: '100%',
 		height: '10%',
-		justifyContent: "center",
 		position: "relative",
 		top: 0,
 		paddingLeft: 15,
-		paddingTop: 23,
-	}
+		paddingTop: 38,
+	},
+	footer: {
+		flexDirection:'row',
+		backgroundColor: "#1a2e35",
+		width: '100%',
+		height: '8%',
+		position: 'absolute',
+		bottom: 0,
+		left: 0,
+	},
 });

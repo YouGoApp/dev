@@ -1,13 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider, ScrollView } from 'react-native';
 
+import { connect } from 'react-redux';
+import { ChangePage, ChangeList } from '.././redux/action';
+
 import Activity from '.././activity/Activity';
 import Description from '.././description/Description';
 import Setting from '.././setting/Setting';
 import RecomRest from '.././recomRest/RecomRest';
+import Profile from '.././profile/Profile';
 
-export default class Recommendation extends React.Component {
+class Recommendation extends React.Component {
  	
+	onoff= 0;
+	
+	state={
+		setting: false
+	}
+	
 	constructor(props){
 		super(props);
 		this.state = {
@@ -21,15 +31,41 @@ export default class Recommendation extends React.Component {
 	}
 	
 	handleProfile=()=>{
-		this.props.navigation.navigate('')
+		this.props.navigation.navigate('Profile')
 	}
 	
-	handleSetting=()=>{
-		this.props.navigation.navigate('Setting')
+	handleSetting=()=>{	
+		if(this.onoff === 0){
+			this.setState({
+				setting: true
+			});
+			this.onoff = 1;
+		}
+		else {
+			this.setState({
+				setting: false
+			})
+			this.onoff = 0;
+		}	
+	}
+	
+	handleDescription=()=>{
+		this.props.navigation.navigate('Description');
 	}
 		
 	render() {
-			
+		
+		var setting = null;
+		if(this.state.setting === true){
+			setting = (
+				<View style={{width: '100%'}}>
+					<Setting />
+				</View>
+			)
+		} else {
+			setting = null;
+		}
+		
 		return (
 			
 			<View style={styles.container}>
@@ -64,6 +100,11 @@ export default class Recommendation extends React.Component {
 				</View>
 				
 				<View style={styles.body}>
+					
+					<View style={{backgroundColor: 'rgba(26,46,53,0.85)'}}>
+						{setting}
+					</View>
+					
 					<View style={{borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10}}>
 						<View style={{flexDirection: 'row', paddingTop: 10}}>
 							<Text style={{paddingBottom: 10, paddingLeft: 15, fontSize: 17}}>Distance</Text>
@@ -82,14 +123,33 @@ export default class Recommendation extends React.Component {
 					</View>
 					
 					<ScrollView>
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
-						<RecomRest />
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleDescription}>
+							<RecomRest />
+						</TouchableOpacity>
 					</ScrollView>
 						
 				</View>
@@ -98,6 +158,15 @@ export default class Recommendation extends React.Component {
     );
   }
 }
+
+function grabVar(state){
+	return {
+		mainPage: state.Page.page,
+		mainList: state.Page.listRest
+	}
+}
+
+export default connect(grabVar)(Recommendation);
 
 const styles = StyleSheet.create({
   container: {

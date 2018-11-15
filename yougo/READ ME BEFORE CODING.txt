@@ -4,3 +4,8 @@ Folder structures:
 - App.js = Main frame for the app
 - pages Folder = Folder for each app section
 - assets Folder = Folder for all assets, this includes images, logos, and any other graphic designs
+
+Install NPM:
+- npm install
+- npm install redux react-redux redux-thunk --save
+- npm install react-native-vector-icons --save

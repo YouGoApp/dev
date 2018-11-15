@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, CheckBox, TouchableOpacity, Image } from 'react-native';
 
-import Recommendation from '.././recommendation/Recommendation';
+import { connect } from 'react-redux';
+import { ChangePage, ChangeList } from '.././redux/action';
 
-export default class Setting extends React.Component {
+class Setting extends React.Component {
   
 	state = {
 		sorting: [
 			true, false, false
 		],
-		isDisabled: false,
-		setting: false
+		isDisabled: false
 	}
-
+	
 	handleSort=(i)=>{
 		var t = 0;
 		
@@ -42,68 +42,18 @@ export default class Setting extends React.Component {
 		})
 	}
 	
-	handleBack=()=>{
-		this.props.navigation.navigate('Recommendation')
-	}
-	
-	handleProfile=()=>{
-		this.props.navigation.navigate('')
-	}
-	
-	handleSetting=()=>{
-		
-		var s = this.state.setting 
-		
-		for (var i=0; i<s.length; i++) {
-			if(s === false){
-					this.props.navigation.navigate('Setting')
-			} else {
-					this.props.navigation.navigate('Recommendation')
-			}
-		}
-	}
-	
 	render() {
     return (
-      <View style={styles.container}>
-				
-        <View style={styles.header}>
-					<View>
-						<TouchableOpacity onPress={this.handleBack}>
-							<Image
-								source={require('../.././assets/icon/left_arrow.png')}
-								style={{width: 25, height: 25}}
-								/>
-						</TouchableOpacity>
-					</View>
-					
-					<View style={{flex: 1, paddingLeft: 155}}>
-						<TouchableOpacity onPress={this.handleProfile}>
-							<Image
-								source={require('../.././assets/icon/user.png')}
-								style={{width: 25, height: 25}}
-								/>
-						</TouchableOpacity>
-					</View>
-					
-					<View style={{flex: 1, paddingLeft: 130}}>
-						<TouchableOpacity onPress={this.handleSetting}>
-							<Image
-								source={require('../.././assets/icon/setting.png')}
-								style={{width: 25, height: 25}}
-								/>
-						</TouchableOpacity>
-					</View>
-				</View>
-				
-				<View style={styles.body}>
+      
+			<View style={{padding: 10, justifyContent: 'center', alignItems: 'center'}}>
+			  <View style={{flexDirection: 'row'}}>
 					<View style={{flexDirection: 'row'}}>
 						<CheckBox
 							onValueChange={this.handleSort.bind(this, 0)}
 							disabled={this.state.isDisabled && !this.state.sorting[0]}
 							value={this.state.sorting[0]}
 							/>
-						<Text style={{marginTop: 6}}>Distance</Text>
+						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Distance</Text>
 					</View>
 
 					<View style={{flexDirection: 'row'}}>
@@ -112,7 +62,7 @@ export default class Setting extends React.Component {
 							disabled={this.state.isDisabled && !this.state.sorting[1]}
 							value={this.state.sorting[1]}
 							/>
-						<Text style={{marginTop: 6}}>Price</Text>
+						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Price</Text>
 					</View>
 
 					<View style={{flexDirection: 'row'}}>
@@ -121,7 +71,7 @@ export default class Setting extends React.Component {
 							disabled={this.state.isDisabled && !this.state.sorting[2]} 
 							value={this.state.sorting[2]}
 							/>
-						<Text style={{marginTop: 6}}>Rating</Text>
+						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Rating</Text>
 					</View>
 				</View>
 				
@@ -130,28 +80,11 @@ export default class Setting extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-	body: {
-		backgroundColor: '#ffffff',
-		width: '100%',
-		height: '90%',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	header: {
-		flexDirection:'row',
-		backgroundColor: "#1a2e35",
-		width: '100%',
-		height: '10%',
-		position: "relative",
-		top: 0,
-		paddingLeft: 15,
-		paddingTop: 38,
-	},
-});
+function grabVar(state){
+	return {
+		mainPage: state.Page.page,
+		mainList: state.Page.listRest
+	}
+}
+
+export default connect(grabVar)(Setting);

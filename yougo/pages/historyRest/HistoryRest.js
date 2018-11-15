@@ -6,7 +6,7 @@ import { ChangePage, ChangeList } from '.././redux/action';
 
 import Description from '.././description/Description';
 
-class RecomRest extends React.Component {
+class HistoryRest extends React.Component {
  			
 	render() {
 			
@@ -19,20 +19,12 @@ class RecomRest extends React.Component {
 						/>
 					
 					<View style={{paddingLeft: 15}}>
-						<View style={{paddingBottom: 17}}>
+						<View style={{paddingBottom: 10}}>
 							<Text style={{fontWeight: 'bold'}}>Restaurant Name</Text>
 						</View>
 
-						<View style={{paddingBottom: 17}}>
-							<Text>$$$$</Text>
-						</View>
-
-						<View style={{paddingBottom: 17}}>
-							<Text>4.0/5.0</Text>
-						</View>
-
 						<View>
-							<Text>5 km</Text>
+							<Text>$$$$</Text>
 						</View>
 					</View>
 				</View>
@@ -48,22 +40,22 @@ function grabVar(state){
 	}
 }
 
-export default connect(grabVar)(RecomRest);
+export default connect(grabVar)(HistoryRest);
 
 const styles = StyleSheet.create({
   container: {
 		flexDirection: 'row',
 		backgroundColor: '#ffffff',
 		width: '100%',
-		height: 150,
+		height: 75,
 		paddingLeft: 15,
 		borderWidth: 0.5,
-		borderColor: 'grey'
+		borderColor: 'grey',
   },
 	images: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: 125,
-		height: 125,
+		width: 50,
+		height: 50,
 	},
 });
