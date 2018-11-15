@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Linking } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 
 import { connect } from 'react-redux';
@@ -15,17 +15,11 @@ class Description extends React.Component {
 	}
 	
 	handleMap=()=>{
-		alert("This will go to Google Map. Later.")
+		Linking.openURL('https://maps.google.com')
 	}
 	
 	render() {
-		
-		const restImg = [
-			'../.././assets/imgs/eat.jpeg',
-			'../.././assets/imgs/miku.jpg',
-			'../.././assets/imgs/nightlife.jpg'
-		];
-		
+
 		return (
       <View style={styles.container}>
 				<View style={styles.header}>
@@ -118,9 +112,9 @@ const styles = StyleSheet.create({
 	CTA: {
 		color: '#fff',
 		fontWeight: '500',
-		fontSize: 28,
-		paddingLeft: 110,
-		paddingTop: 10,
+		fontSize: 25,
+		paddingLeft: 125,
+		paddingTop: 15,
 	},
 	header: {
 		flexDirection:'row',

@@ -16,7 +16,7 @@ export default class Login extends React.Component {
 				
 				<View style={styles.whitebox}>
 					
-					<Text style={{marginBottom: 35, fontSize: 23, fontWeight: "bold"}}>Sign in to your account</Text>
+					<Text style={{marginBottom: 35, fontSize: 25, fontWeight: "bold"}}>Sign in to your account</Text>
 					
 					<TextInput 
 						style={styles.input}
@@ -43,15 +43,15 @@ export default class Login extends React.Component {
 					</View>
 					
 					<View style={{marginBottom: 20, flexDirection: "row"}}>
-						<Text>Don't have an account? </Text>
+						<Text style={{fontSize: 16}}>Don't have an account? </Text>
 						<TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-							<Text style={{color: "#45d8d5", fontWeight: "bold"}}>Sign Up</Text>
+							<Text style={{color: "#45d8d5", fontWeight: "bold", fontSize: 16}}>Sign Up</Text>
 						</TouchableOpacity>
 					</View>
 									
-					<Text>By signing in, I agree to YouGo</Text>
+					<Text style={{fontSize: 16}}>By signing in, I agree to YouGo</Text>
 					
-					<Text>
+					<Text style={{fontSize: 16}}>
 						<Text onPress={() => Linking.openURL('https://www.google.com')} style={{color: '#45d8d5'}}>Privacy Policy</Text> and <Text onPress={() => Linking.openURL('https://www.google.com')} style={{color: '#45d8d5'}}>Terms of Service</Text>
 					</Text>	
 				

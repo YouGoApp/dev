@@ -44,7 +44,7 @@ export default class Signup extends React.Component {
 					
 					<TextInput 
 						style={styles.input}
-						placeholder="Username"
+						placeholder="Username (No space, Max. 10 chars)"
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
@@ -54,7 +54,7 @@ export default class Signup extends React.Component {
 					
 					<TextInput 
 						style={styles.input}
-						placeholder="Password"
+						placeholder="Password (Max. 10 chars)"
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: 325,
-		height: 500,
+		height: 525,
 	},
 	input: {
 		marginBottom: 20,

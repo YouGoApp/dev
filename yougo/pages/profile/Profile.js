@@ -7,6 +7,7 @@ import { ChangePage, ChangeList } from '.././redux/action';
 import Recommendation from '.././recommendation/Recommendation';
 import HistoryRest from '.././historyRest/HistoryRest';
 import Description from '.././description/Description';
+import Login from '.././login/Login';
 
 class Profile extends React.Component {
   
@@ -17,6 +18,10 @@ class Profile extends React.Component {
 	handleDescription=()=>{
 		this.props.navigation.navigate('Description')
 	}
+  
+  handleSignOut=()=>{
+    this.props.navigation.navigate('Login')
+  }
 	
 	render() {
     		
@@ -71,12 +76,9 @@ class Profile extends React.Component {
 				</View>
 				
 				<View style={styles.footer}>
-					<View>
-						<TouchableOpacity onPress={this.handleMap}>
-							<Text style={styles.CTA}>Sign Out</Text>
-						</TouchableOpacity>
-					</View>
-					
+          <TouchableOpacity onPress={this.handleSignOut}>
+            <Text style={styles.CTA}>Sign Out</Text>
+          </TouchableOpacity>
 				</View>
 				
 			</View>
