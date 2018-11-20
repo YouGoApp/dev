@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, Linking, TouchableOpacity, TextInput } 
 import Preference from '.././preference/Preference';
 import Signup from '.././signup/Signup';
 
+//https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=h&location=lat,lng&radius=0&type=wat
+
 export default class Login extends React.Component {
 	
 	handleLogin=()=>{

@@ -52,7 +52,7 @@ class Recommendation extends React.Component {
 	handleDescription=()=>{
 		this.props.navigation.navigate('Description');
 	}
-		
+  
 	render() {
 		
 		var setting = null;
@@ -65,7 +65,7 @@ class Recommendation extends React.Component {
 		} else {
 			setting = null;
 		}
-		
+    
 		return (
 			
 			<View style={styles.container}>
@@ -123,33 +123,9 @@ class Recommendation extends React.Component {
 					</View>
 					
 					<ScrollView>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<RecomRest />
-						</TouchableOpacity>
+						
+						<RecomRest />
+						
 					</ScrollView>
 						
 				</View>

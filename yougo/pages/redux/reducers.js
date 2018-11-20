@@ -2,7 +2,9 @@ const pageDefault = {
 	page: 1,
 	numPeople: "",
 	listRest: "",
-	distance: ""
+	distance: "",
+  restName: "",
+  restRating: "",
 };
 
 export function Page(state = pageDefault, action){
@@ -24,7 +26,15 @@ export function Page(state = pageDefault, action){
 		case "CHANGE_DISTANCE":
 			obj.distance = action.distance;
 			return obj;
-			
+      
+    case "CHANGE_REST_NAME":
+			obj.restName = action.restName;
+			return obj;
+		
+    case "CHANGE_REST_RATING":
+			obj.restRating = action.restRating;
+			return obj;  
+      
 		default:
 			return state;
 	}

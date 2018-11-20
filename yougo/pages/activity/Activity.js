@@ -5,7 +5,7 @@ import Recommendation from '.././recommendation/Recommendation';
 import Preference from '.././preference/Preference';
 
 import { connect } from 'react-redux';
-import { ChangePeople, ChangeList } from '.././redux/action';
+import { ChangePeople, ChangeList, ChangeRestName, ChangeRestRating } from '.././redux/action';
 
 class Activity extends React.Component {
 	
@@ -13,7 +13,11 @@ class Activity extends React.Component {
 		checked: [
 			false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false 
 		],
-		isDisabled: false
+		isDisabled: false,
+    cuisine: [
+      "aboriginal", "middleeast", "african", "american", "belgian", "", "chinese"
+    ],
+    result: []
 	}
 	
 	handleChecked=(i)=>{
@@ -48,10 +52,17 @@ class Activity extends React.Component {
 		
 	}
 		
-	handleContinue=()=>{
-		this.props.navigation.navigate('Recommendation')
+	handleContinue=async(i)=>{
+		
+    var resp = await fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&keyword="+this.state.cuisine[i]+"&type=restaurant&location=49.2499076,-122.9991312&radius=2000");
+    var json = await resp.json();
+    console.log(json.results);
+    this.setState({
+      result: json.results
+    })
+    this.props.navigation.navigate('Recommendation')
 	}
-	
+  
 	handleBack=()=>{
 		this.props.navigation.navigate('Preference')
 	}
@@ -84,7 +95,7 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[0]}
 									value={this.state.checked[0]}
 									/>
-								<Text style={{marginTop: 6}}>Aboriginal</Text>
+								<Text style={{marginTop: 6}} value={this.state.cuisine[0]}>Aboriginal</Text>
 							</View>
 							
 							<View style={{flexDirection: 'row'}}>
@@ -93,7 +104,7 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[1]}
 									value={this.state.checked[1]}
 									/>
-								<Text style={{marginTop: 6}}>Afghan/Middle Eastern</Text>
+								<Text style={{marginTop: 6}} value={this.state.cuisine[1]}>Afghan/Middle Eastern</Text>
 							</View>
 							
 							<View style={{flexDirection: 'row'}}>
@@ -102,7 +113,7 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[2]} 
 									value={this.state.checked[2]}
 									/>
-								<Text style={{marginTop: 6}}>African</Text>
+								<Text style={{marginTop: 6}} value={this.state.cuisine[2]}>African</Text>
 							</View>
 							
 							<View style={{flexDirection: 'row'}}>
@@ -111,7 +122,7 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[3]}
 									value={this.state.checked[3]}
 									/>
-								<Text style={{marginTop: 6}}>American</Text>
+								<Text style={{marginTop: 6}} value={this.state.cuisine[3]}>American</Text>
 							</View>
 							
 							<View style={{flexDirection: 'row'}}>
@@ -147,7 +158,7 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[7]}
 									value={this.state.checked[7]}
 									/>
-								<Text style={{marginTop: 6}}>Chinese</Text>
+								<Text style={{marginTop: 6}} value={this.state.cuisine[8]}>Chinese</Text>
 							</View>
 							
 							<View style={{flexDirection: 'row'}}>

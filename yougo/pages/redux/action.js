@@ -25,3 +25,17 @@ export function ChangeDistance(distance){
 		distance:distance
 	}
 }
+
+export function ChangeRestName(restName){
+	return{
+		type:"CHANGE_REST_NAME",
+		restName:restName
+	}
+}
+
+export function ChangeRestRating(restRating){
+	return{
+		type:"CHANGE_REST_RATING",
+		restRating:restRating
+	}
+}
