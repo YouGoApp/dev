@@ -15,7 +15,7 @@ class Activity extends React.Component {
 		],
 		isDisabled: false,
     cuisine: [
-      "chinese", "canadian", "african", "american", "belgian"
+      "aboriginal", "middle+east", "african", "american", "belgian", "canadian", "caribbean", "chinese", "european", "filipino", "french", "german", "greek", "indian", "international", "italian", "japanese", "malaysian", "mediterranean", "mexican", "lebanese", "south+east+asian", ""
     ],
     result: []
 	}
@@ -63,7 +63,7 @@ class Activity extends React.Component {
       }
     }
     
-    var resp = await fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&keyword="+cuis.join(",")+"&type=restaurant&location=49.2499076,-122.9991312&radius=5000");
+    var resp = await fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&keyword="+cuis.join(",")+"&type=restaurant&location=49.2499076,-122.9991312&radius=5000");
     var json = await resp.json();
     console.log(json.results);
     this.props.dispatch(ChangeRest(json.results));
