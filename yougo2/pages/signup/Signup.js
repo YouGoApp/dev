@@ -4,9 +4,31 @@ import Preference from '.././preference/Preference';
 import Login from '.././login/Login';
 
 export default class Signup extends React.Component {
+  
+  username="";
+  password="";
+  email="";
+  city="";
   	
 	handleSignUp=()=>{
-		this.props.navigation.navigate('Preference')
+   // alert(this.username +":"+ this.password +":"+ this.email +":"+ this.city);
+    //return false;
+    var fd = new FormData();
+    fd.append("username", this.username);
+    fd.append("password", this.password);
+    fd.append("email", this.email);
+    fd.append("city", this.city);
+    fetch("http://142.232.157.252:8888/server/insertuser.php", {
+      method: "POST",
+      body: fd
+    }).then((resp)=>{
+      return resp.json();
+    }).then((json)=>{
+      if(json){
+        alert("Thanks for registering my app")
+        //this.props.navigation.navigate('Preference');
+      }
+    });
 	}
 	
 	handleCancel=()=>{
@@ -14,23 +36,19 @@ export default class Signup extends React.Component {
 	}
 	
 	handleUsername=(text)=>{
-		
+		this.username = text;
 	}
 	
 	handlePassword=(text)=>{
-		password => this.setState({
-			password
-		})
+		this.password = text;
 	}
 	
 	handleEmail=(text)=>{
-		email => this.setState({ 
-			email 
-		})
+		this.email = text;
 	}
 	
 	handleCity=(text)=>{
-		
+		this.city = text;
 	}
 	
 	render() {

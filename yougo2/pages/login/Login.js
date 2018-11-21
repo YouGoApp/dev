@@ -8,7 +8,13 @@ import Signup from '.././signup/Signup';
 export default class Login extends React.Component {
 	
 	handleLogin=()=>{
-		this.props.navigation.navigate('Preference');
+    fetch("http://142.232.157.252:8888/server/insertuser.php").then((resp)=>{
+      return resp.json();
+    }).then((json)=>{
+      if(json){
+        this.props.navigation.navigate('Preference')
+      }
+    });
 	}
 
 	render() {
