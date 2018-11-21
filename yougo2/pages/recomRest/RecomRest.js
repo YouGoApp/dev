@@ -8,11 +8,7 @@ import Description from '.././description/Description';
 import Items from '.././items/Items';
 
 class RecomRest extends React.Component {
-  
-  handleDescription=()=>{
-    this.props.navigation.navigate('Description');
-	}
-  
+    
 	render() {
 		
     var allResults = this.props.restList.map((obj, index)=>{

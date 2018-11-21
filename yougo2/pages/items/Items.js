@@ -6,17 +6,13 @@ import { ChangePage, ChangeList, ChangeRest } from '.././redux/action';
 
 class Items extends React.Component {
   
-  handleDescription=()=>{
-    this.props.navigation.navigate('Description');
-	}
-
 	render() {
     return (
       <View>
-        <TouchableOpacity onPress={this.handleDescription}>
+        
           <View style={styles.container}>
 
-            <View style={{flexDirection: 'row', paddingTop: 12}}>
+            <View style={{flexDirection: 'row', paddingTop: 11}}>
               
               <View style={{paddingLeft: 15}}>
                 <View style={{paddingBottom: 17}}>
@@ -30,12 +26,16 @@ class Items extends React.Component {
                 <View style={{paddingBottom: 17}}>
                   <Text>Price Level: {this.props.obj.price_level}</Text>
                 </View>
+                
+                <View>
+                  <Text>Address: {this.props.obj.vicinity}</Text>
+                </View>
               </View>
 
             </View>
 
           </View> 
-        </TouchableOpacity>
+        
       </View>
     )
   }

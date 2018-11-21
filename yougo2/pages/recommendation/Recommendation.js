@@ -33,6 +33,10 @@ class Recommendation extends React.Component {
 	handleProfile=()=>{
 		this.props.navigation.navigate('Profile')
 	}
+  
+  handleDescription=()=>{
+    this.props.navigation.navigate('Description')
+  }
 	
 	handleSetting=()=>{	
 		if(this.onoff === 0){
@@ -119,7 +123,9 @@ class Recommendation extends React.Component {
 					</View>
 					
 					<ScrollView>
-						  <RecomRest />
+						<TouchableOpacity onPress={this.handleDescription}>
+              <RecomRest />
+            </TouchableOpacity>
 					</ScrollView>
 						
 				</View>

@@ -15,7 +15,7 @@ class Activity extends React.Component {
 		],
 		isDisabled: false,
     cuisine: [
-      "aboriginal", "middle+east", "african", "american", "belgian", "canadian", "caribbean", "chinese", "european", "filipino", "french", "german", "greek", "indian", "international", "italian", "japanese", "malaysian", "mediterranean", "mexican", "lebanese", "south+east+asian", ""
+      "japanese", "korean", "chinese", "greek", "italian", "mexican", "thai", "vietnamese", "indonesian", "indian", "persian", "french", "spanish", "filipino", "taiwanese", "ukrainian", "jamaican", "swedish", "fast+food", "bbq", "singaporean", "malaysian", "vegetarian", "vegan", "turkish"
     ],
     result: []
 	}
@@ -33,7 +33,7 @@ class Activity extends React.Component {
 		}
 		
 		for (var i=0; i<arr.length; i++) {
-			if(t >= 10){
+			if(t >= 3){
 				this.setState({
 					isDisabled: true
 				})
@@ -91,7 +91,7 @@ class Activity extends React.Component {
 				<View style={styles.body}>
 					<Text style={styles.prefTitle}>Select the cuisines that you prefer</Text>
 				
-					<Text style={styles.prefSubTit}>Select up to 10 cuisines</Text>
+					<Text style={styles.prefSubTit}>Select up to 3 cuisines</Text>
 					
 					<ScrollView contentContainerStyle={styles.contentContainer}>
 						<View>
@@ -102,216 +102,225 @@ class Activity extends React.Component {
 									disabled={this.state.isDisabled && !this.state.checked[0]}
 									value={this.state.checked[0]}
 									/>
-								<Text style={{marginTop: 6}}>Aboriginal</Text>
+								<Text style={{marginTop: 6}}>Japanese</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[1]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 1)}
 									disabled={this.state.isDisabled && !this.state.checked[1]}
 									value={this.state.checked[1]}
 									/>
-								<Text style={{marginTop: 6}} value={this.state.cuisine[1]}>Afghan/Middle Eastern</Text>
+								<Text style={{marginTop: 6}}>Korean</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[2]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 2)}
 									disabled={this.state.isDisabled && !this.state.checked[2]} 
 									value={this.state.checked[2]}
 									/>
-								<Text style={{marginTop: 6}} value={this.state.cuisine[2]}>African</Text>
+								<Text style={{marginTop: 6}}>Chinese</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[3]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 3)}
 									disabled={this.state.isDisabled && !this.state.checked[3]}
 									value={this.state.checked[3]}
 									/>
-								<Text style={{marginTop: 6}} value={this.state.cuisine[3]}>American</Text>
+								<Text style={{marginTop: 6}}>Greek</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[4]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 4)}
 									disabled={this.state.isDisabled && !this.state.checked[4]}
 									value={this.state.checked[4]}
 									/>
-								<Text style={{marginTop: 6}}>Belgian</Text>
+								<Text style={{marginTop: 6}}>Italian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[5]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 5)}
 									disabled={this.state.isDisabled && !this.state.checked[5]}
 									value={this.state.checked[5]}
 									/>
-								<Text style={{marginTop: 6}}>Canadian</Text>
+								<Text style={{marginTop: 6}}>Mexican</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[6]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 6)}
 									disabled={this.state.isDisabled && !this.state.checked[6]}
 									value={this.state.checked[6]}
 									/>
-								<Text style={{marginTop: 6}}>Caribbean</Text>
+								<Text style={{marginTop: 6}}>Thai</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[7]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 7)}
 									disabled={this.state.isDisabled && !this.state.checked[7]}
 									value={this.state.checked[7]}
 									/>
-								<Text style={{marginTop: 6}} value={this.state.cuisine[8]}>Chinese</Text>
+								<Text style={{marginTop: 6}}>Vietnamese</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[8]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 8)}
 									disabled={this.state.isDisabled && !this.state.checked[8]}
 									value={this.state.checked[8]}
 									/>
-								<Text style={{marginTop: 6}}>European</Text>
+								<Text style={{marginTop: 6}}>Indonesian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[9]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 9)}
 									disabled={this.state.isDisabled && !this.state.checked[9]}
 									value={this.state.checked[9]}
 									/>
-								<Text style={{marginTop: 6}}>Filipino</Text>
+								<Text style={{marginTop: 6}}>Indian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[10]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 10)}
 									disabled={this.state.isDisabled && !this.state.checked[10]}
 									value={this.state.checked[10]}
 									/>
-								<Text style={{marginTop: 6}}>French</Text>
+								<Text style={{marginTop: 6}}>Persian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[11]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 11)}
 									disabled={this.state.isDisabled && !this.state.checked[11]}
 									value={this.state.checked[11]}
 									/>
-								<Text style={{marginTop: 6}}>German</Text>
+								<Text style={{marginTop: 6}}>French</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[12]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 12)}
 									disabled={this.state.isDisabled && !this.state.checked[12]}
 									value={this.state.checked[12]}
 									/>
-								<Text style={{marginTop: 6}}>Greek</Text>
+								<Text style={{marginTop: 6}}>Spanish</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[13]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 13)}
 									disabled={this.state.isDisabled && !this.state.checked[13]}
 									value={this.state.checked[13]}
 									/>
-								<Text style={{marginTop: 6}}>Indian</Text>
+								<Text style={{marginTop: 6}}>Philipino</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[14]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 14)}
 									disabled={this.state.isDisabled && !this.state.checked[14]}
 									value={this.state.checked[14]}
 									/>
-								<Text style={{marginTop: 6}}>International</Text>
+								<Text style={{marginTop: 6}}>Taiwanese</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[15]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 15)}
 									disabled={this.state.isDisabled && !this.state.checked[15]}
 									value={this.state.checked[15]}
 									/>
-								<Text style={{marginTop: 6}}>Italian</Text>
+								<Text style={{marginTop: 6}}>Ukrainian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[16]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 16)}
 									disabled={this.state.isDisabled && !this.state.checked[16]}
 									value={this.state.checked[16]}
 									/>
-								<Text style={{marginTop: 6}}>Japanese</Text>
+								<Text style={{marginTop: 6}}>Jamaican</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[17]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 17)}
 									disabled={this.state.isDisabled && !this.state.checked[17]}
 									value={this.state.checked[17]}
 									/>
-								<Text style={{marginTop: 6}}>Malaysian</Text>
+								<Text style={{marginTop: 6}}>Swedish</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[18]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 18)}
 									disabled={this.state.isDisabled && !this.state.checked[18]}
 									value={this.state.checked[18]}
 									/>
-								<Text style={{marginTop: 6}}>Mediterranean</Text>
+								<Text style={{marginTop: 6}}>Fast Food</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[19]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 19)}
 									disabled={this.state.isDisabled && !this.state.checked[19]}
 									value={this.state.checked[19]}
 									/>
-								<Text style={{marginTop: 6}}>Mexican &amp; Latin American</Text>
+								<Text style={{marginTop: 6}}>BBQ</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[20]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 20)}
 									disabled={this.state.isDisabled && !this.state.checked[20]}
 									value={this.state.checked[20]}
 									/>
-								<Text style={{marginTop: 6}}>Moroccan/Lebanese</Text>
+								<Text style={{marginTop: 6}}>Singaporean</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[21]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 21)}
 									disabled={this.state.isDisabled && !this.state.checked[21]}
 									value={this.state.checked[21]}
 									/>
-								<Text style={{marginTop: 6}}>South-East Asian</Text>
+								<Text style={{marginTop: 6}}>Malaysian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[22]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 22)}
 									disabled={this.state.isDisabled && !this.state.checked[22]}
 									value={this.state.checked[22]}
 									/>
-								<Text style={{marginTop: 6}}>Thai</Text>
+								<Text style={{marginTop: 6}}>Vegetarian</Text>
 							</View>
 							
-							<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'row'}} value={this.state.cuisine[23]}>
 								<CheckBox
 									onValueChange={this.handleChecked.bind(this, 23)}
 									disabled={this.state.isDisabled && !this.state.checked[23]}
 									value={this.state.checked[23]}
 									/>
-								<Text style={{marginTop: 6}}>Vietnamese</Text>
+								<Text style={{marginTop: 6}}>Vegan</Text>
 							</View>			
 							
+              <View style={{flexDirection: 'row'}} value={this.state.cuisine[24]}>
+								<CheckBox
+									onValueChange={this.handleChecked.bind(this, 24)}
+									disabled={this.state.isDisabled && !this.state.checked[24]}
+									value={this.state.checked[24]}
+									/>
+								<Text style={{marginTop: 6}}>Turkish</Text>
+							</View>	
+              
 						</View>
 					</ScrollView>
 					
