@@ -7,12 +7,38 @@ import Signup from '.././signup/Signup';
 
 export default class Login extends React.Component {
 	
-	handleLogin=()=>{
-    fetch("http://142.232.157.252:8888/server/insertuser.php").then((resp)=>{
+	state = {
+    username:"",
+    password:""
+  }
+
+  handleUsername=(val)=>{
+    this.setState({
+      username:val
+    })
+  }
+  
+  handlePassword=(val)=>{
+    this.setState({
+      password:val
+    })
+  }
+  
+  handleLogin=()=>{
+    var fd = new FormData();
+    fd.append("username", this.state.username);
+    fd.append("password", this.state.password);
+    fetch("https://yougoapp.herokuapp.com/selectusers.php", {
+      method: "POST",
+      body: fd
+    }).then((resp)=>{
       return resp.json();
     }).then((json)=>{
-      if(json){
-        this.props.navigation.navigate('Preference')
+      console.log(json);
+      if(json.length == 0 || "" || null){
+        alert("Incorrect username/password, please try again")
+      } else {
+        this.props.navigation.navigate('Preference');
       }
     });
 	}
@@ -31,8 +57,10 @@ export default class Login extends React.Component {
 						placeholder="Username"
 						placeholderTextColor="grey"
 						autoCapitalize="none"
-						underlineColorAndroid="transparent"
-						/>
+            underlineColorAndroid="transparent"
+            onChangeText={(val)=>{
+              this.handleUsername(val)
+            }}></TextInput>
 					
 					<TextInput 
 						style={styles.input}
@@ -40,7 +68,10 @@ export default class Login extends React.Component {
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid="transparent"
-						/>
+            secureTextEntry={true}
+            onChangeText={(val)=>{
+              this.handlePassword(val)
+            }}></TextInput>
 					
 					<View style={styles.button}>
 						<Button 

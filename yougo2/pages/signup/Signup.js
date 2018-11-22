@@ -11,24 +11,31 @@ export default class Signup extends React.Component {
   city="";
   	
 	handleSignUp=()=>{
-   // alert(this.username +":"+ this.password +":"+ this.email +":"+ this.city);
-    //return false;
-    var fd = new FormData();
+    if(this.username !== "" && this.password !== "" & this.email !== "" && this.city !== ""){
+      var fd = new FormData();
     fd.append("username", this.username);
     fd.append("password", this.password);
     fd.append("email", this.email);
     fd.append("city", this.city);
-    fetch("http://142.232.157.252:8888/server/insertuser.php", {
+    fetch("https://yougoapp.herokuapp.com/insertuser.php", {
       method: "POST",
       body: fd
-    }).then((resp)=>{
-      return resp.json();
-    }).then((json)=>{
-      if(json){
-        alert("Thanks for registering my app")
-        //this.props.navigation.navigate('Preference');
-      }
-    });
+      }).then((resp)=>{
+        return resp.json();
+      }).then((json)=>{
+        if(json.length == 0 || "" || null){
+          alert("Sign up Successful")
+          this.props.navigation.navigate('Login')
+        } else {
+          console.log(json);
+        }
+      });
+    } else {
+      alert ("PLease fill in all fields")
+    }
+   // alert(this.username +":"+ this.password +":"+ this.email +":"+ this.city);
+    //return false;
+    
 	}
 	
 	handleCancel=()=>{
