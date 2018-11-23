@@ -5,7 +5,7 @@ import Recommendation from '.././recommendation/Recommendation';
 import Preference from '.././preference/Preference';
 
 import { connect } from 'react-redux';
-import { ChangePeople, ChangeList, ChangeRest } from '.././redux/action';
+import { ChangePeople, ChangeList, ChangeRest, ChangeDistance } from '.././redux/action';
 
 class Activity extends React.Component {
 	
@@ -53,7 +53,7 @@ class Activity extends React.Component {
 	}
 		
 	handleContinue=async()=>{
-		
+
     var cuis = [];
     for (var i=0; i<this.state.checked.length; i++){
       if(this.state.checked[i] === true){
@@ -62,13 +62,14 @@ class Activity extends React.Component {
         )
       }
     }
-    
+
     var resp = await fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&keyword="+cuis.join(",")+"&type=restaurant&location=49.2499076,-122.9991312&radius=5000");
     var json = await resp.json();
     console.log(json.results);
     this.props.dispatch(ChangeRest(json.results));
     this.props.navigation.navigate('Recommendation');
-	}
+  } 
+	
   
 	handleBack=()=>{
 		this.props.navigation.navigate('Preference')
@@ -339,7 +340,8 @@ class Activity extends React.Component {
 
 function grabVar(state){
 	return {
-		numPeople: state.Page.numPeople
+		numPeople: state.Page.numPeople,
+    sliderDistance: state.Page.sliderDistance
 	}
 }
 

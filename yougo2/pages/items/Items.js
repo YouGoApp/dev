@@ -14,7 +14,7 @@ class Items extends React.Component {
 
             <View style={{flexDirection: 'row', paddingTop: 11}}>
               
-              <View style={{paddingLeft: 15}}>
+              <View>
                 <View style={{paddingBottom: 17}}>
                   <Text style={{fontWeight: 'bold'}}>{this.props.obj.name}</Text>
                 </View>
@@ -53,13 +53,16 @@ export default connect(grabVar)(Items);
 
 const styles = StyleSheet.create({
   container: {
-		flexDirection: 'row',
+		flex: 1,
+    flexDirection: 'row',
 		backgroundColor: '#ffffff',
 		width: '100%',
 		height: 150,
 		paddingLeft: 15,
-		borderWidth: 0.5,
-		borderColor: 'grey'
+		borderWidth: 1,
+    borderRadius: 10,
+		borderColor: 'grey',
+    margin: 0,
   },
 	images: {
 		alignItems: 'center',

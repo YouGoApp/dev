@@ -35,21 +35,3 @@ function grabVar(state){
 }
 
 export default connect(grabVar)(RecomRest);
-
-const styles = StyleSheet.create({
-  container: {
-		flexDirection: 'row',
-		backgroundColor: '#ffffff',
-		width: '100%',
-		height: 150,
-		paddingLeft: 15,
-		borderWidth: 0.5,
-		borderColor: 'grey'
-  },
-	images: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: 125,
-		height: 125,
-	},
-});

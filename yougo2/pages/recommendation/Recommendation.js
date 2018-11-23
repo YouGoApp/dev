@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
-import { ChangePage, ChangeList } from '.././redux/action';
+import { ChangePage, ChangeList, ChangeDistance } from '.././redux/action';
 
 import Activity from '.././activity/Activity';
 import Description from '.././description/Description';
@@ -123,9 +123,9 @@ class Recommendation extends React.Component {
 					</View>
 					
 					<ScrollView>
-						<TouchableOpacity onPress={this.handleDescription}>
+						
               <RecomRest />
-            </TouchableOpacity>
+            
 					</ScrollView>
 						
 				</View>
@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
   },
 	body: {
-		backgroundColor: '#ffffff',
+		flex: 1,
+    backgroundColor: '#ffffff',
 		width: '100%',
 		height: '90%',
 	},
