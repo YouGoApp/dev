@@ -33,12 +33,21 @@ class Profile extends React.Component {
 							<Image
 								source={require('../.././assets/icon/left_arrow.png')}
 								style={{width: 25, height: 25}}
-								/>
+								/>	
 						</TouchableOpacity>
+					</View>
+					<View style={styles.LogOut}>
+					<TouchableOpacity onPress={this.handleSignOut}>
+					<Image 
+								source={require('../.././assets/icon/sign_out.png')}
+								style={{width:28, height: 28,}}
+							/>		
+					</TouchableOpacity>
 					</View>
 				</View>
 				
 				<View style={styles.body}>
+					<View style={styles.profile}>
 					<View style={styles.profImg}>
 						<Image
 							source={{uri: 'https://goo.gl/yXUpAJ'}}
@@ -46,8 +55,11 @@ class Profile extends React.Component {
 							/>
 					</View>
 						
-					<Text style={styles.prefTitle}>@username</Text>
-					<ScrollView style={{width: '100%', paddingTop: 1}}>
+					<Text style={styles.prefTitle}>Jessica Ly</Text>
+				
+					
+					</View>
+					<ScrollView style={styles.profRest}>
 						<TouchableOpacity onPress={this.handleDescription}>
 							<HistoryRest />
 						</TouchableOpacity>
@@ -74,13 +86,6 @@ class Profile extends React.Component {
 						</TouchableOpacity>
 					</ScrollView>
 				</View>
-				
-				<View style={styles.footer}>
-          <TouchableOpacity onPress={this.handleSignOut}>
-            <Text style={styles.CTA}>Sign Out</Text>
-          </TouchableOpacity>
-				</View>
-				
 			</View>
     );
   }
@@ -105,18 +110,33 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
   },
 	body: {
-		backgroundColor: '#ffffff',
+		backgroundColor: 'white',
 		width: '100%',
 		height: '90%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+	profile: {
+		backgroundColor: "#e6e6e6", 
+		justifyContent: 'center',
+		alignItems: 'center', 
+		width: '97%',
+		borderRadius: 5,
+		borderColor: '#e5e5e5',
+		shadowColor: '#000',
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 8,
+		
+	},
 	prefTitle: {
-		color: '#1a2e35',
+		color: 'black',
 		fontWeight: '500',
-		fontSize: 28,
+		fontSize: 21,
 		paddingBottom: 20,
-		paddingTop: 25,
+		paddingTop: 5,
+		paddingRight: 4,
 	},
 	subTitle:{
 		color: '#1a2e35',
@@ -124,15 +144,20 @@ const styles = StyleSheet.create({
 		paddingBottom: 15,
 		paddingTop: 10,
 	},
+	profRest:{
+		width: '100%', 
+		paddingTop: 2,
+		elevation: 6,
+	},
 	profImg: {
 		backgroundColor: '#1a2e35',
-		width: 150,
-		height: 150,
+		width:  120,
+		height: 120,
 		borderRadius: 100,
 		borderWidth: 0,
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 50,
+		marginTop: 15,
 	},
 	CTA: {
 		color: '#fff',
@@ -160,4 +185,12 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 	},
+	LogOut: {
+		flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+		paddingBottom: 10,
+		paddingRight: 15,
+	}
 });
