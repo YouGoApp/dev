@@ -12,7 +12,7 @@ class HistoryRest extends React.Component {
 			
 		return (
 			<View style={styles.container}>
-        <View style={{flexDirection: 'row', paddingTop: 12}}>
+        <View style={{flexDirection: 'row'}}>
 					<Image
 						style={styles.images}
 						source={{uri:'https://goo.gl/QvGDjz'}}
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
 		width: '97%',
 		height: 75,
 		paddingLeft: 15,
-		borderWidth: 0.5,
+    paddingTop: 7,
+		borderWidth: 0.75,
 		borderColor: 'grey',
 		borderRadius: 5, 
-		paddingTop: 1,
 		borderRadius: 5,
-		borderColor: '#EEEEEE',
+		borderColor: '#45d8d5',
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 5},
     shadowOpacity: 1,

@@ -48,17 +48,18 @@ class Profile extends React.Component {
 				
 				<View style={styles.body}>
 					<View style={styles.profile}>
-					<View style={styles.profImg}>
-						<Image
-							source={{uri: 'https://goo.gl/yXUpAJ'}}
-							style={{width: '100%', height: '100%', borderRadius: 150}}
-							/>
-					</View>
-						
-					<Text style={styles.prefTitle}>Jessica Ly</Text>
+            <View style={styles.profImg}>
+              <Image
+                source={{uri: 'https://goo.gl/yXUpAJ'}}
+                style={{width: '100%', height: '100%', borderRadius: 150}}
+                />
+            </View>
+
+            <Text style={styles.prefTitle}>@username</Text>
 				
 					
 					</View>
+          
 					<ScrollView style={styles.profRest}>
 						<TouchableOpacity onPress={this.handleDescription}>
 							<HistoryRest />
@@ -117,25 +118,26 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	profile: {
-		backgroundColor: "#e6e6e6", 
+		backgroundColor: "#ffffff", 
 		justifyContent: 'center',
 		alignItems: 'center', 
 		width: '97%',
 		borderRadius: 5,
-		borderColor: '#e5e5e5',
+		borderColor: '#45d8d5',
+    borderWidth: 0.75,
 		shadowColor: '#000',
     shadowOffset: {width: 0, height: 5},
     shadowOpacity: 1,
     shadowRadius: 10,
-    elevation: 8,
-		
+    elevation: 5,
+		marginTop: 5,
 	},
 	prefTitle: {
 		color: 'black',
 		fontWeight: '500',
 		fontSize: 21,
 		paddingBottom: 20,
-		paddingTop: 5,
+		paddingTop: 15,
 		paddingRight: 4,
 	},
 	subTitle:{

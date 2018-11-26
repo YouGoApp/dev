@@ -105,7 +105,7 @@ class Recommendation extends React.Component {
 						{setting}
 					</View>
 					
-					<View style={{borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10}}>
+					<View style={{borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff"}}>
 						<View style={{flexDirection: 'row', paddingTop: 10}}>
 							<Text style={{paddingBottom: 10, paddingLeft: 15, fontSize: 17}}>Distance</Text>
 							<Text
@@ -171,5 +171,6 @@ const styles = StyleSheet.create({
 	},
 	distanceSlider: {
 		width: 405,
+    backgroundColor: "#ffffff",
 	}
 });

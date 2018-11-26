@@ -12,9 +12,9 @@ class Items extends React.Component {
         
           <View style={styles.container}>
 
-            <View style={{flexDirection: 'row', paddingTop: 11}}>
+            <View style={{flexDirection: 'row', paddingTop: 10}}>
               
-              <View>
+              <View style={{width: '95%'}}>
                 <View style={{paddingBottom: 17}}>
                   <Text style={{fontWeight: 'bold'}}>{this.props.obj.name}</Text>
                 </View>
@@ -30,6 +30,13 @@ class Items extends React.Component {
                 <View>
                   <Text>Address: {this.props.obj.vicinity}</Text>
                 </View>
+              </View>
+              
+              <View style={{flex: 1, width: '5%', justifyContent: "center", alignItems: "center"}}>
+                <Image
+                  source={require('../.././assets/icon/right_arrow_black.png')}
+                  style={{width: 20}}
+                  />
               </View>
 
             </View>
@@ -56,17 +63,17 @@ const styles = StyleSheet.create({
 		flex: 1,
     flexDirection: 'row',
 		backgroundColor: '#FFFFFF',
-		width: '95%',
+		width: '97%',
 		height: 150,
 		paddingLeft: 15,
-		borderWidth: 1,
+		borderWidth: 0.75,
     borderRadius: 5,
-		borderColor: '#EEEEEE',
-    shadowColor: '#000',
+		borderColor: '#45d8d5',
+    shadowColor: '#ffffff',
     shadowOffset: {width: 0, height: 5},
     shadowOpacity: 1,
     shadowRadius: 10,
-    elevation: 1,
+    elevation: 5,
     margin: 5,
   },
 	images: {
