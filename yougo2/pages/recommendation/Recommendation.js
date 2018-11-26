@@ -71,7 +71,7 @@ class Recommendation extends React.Component {
 			<View style={styles.container}>
         
 				<View style={styles.header}>
-					<View>
+					<View style={{paddingRight: 148, paddingTop: 42}}>
 						<TouchableOpacity onPress={this.handleBack}>
 							<Image
 								source={require('../.././assets/icon/left_arrow.png')}
@@ -80,7 +80,7 @@ class Recommendation extends React.Component {
 						</TouchableOpacity>
 					</View>
 					
-					<View style={{flex: 1, paddingLeft: 155}}>
+					<View style={{paddingTop: 42}}>
 						<TouchableOpacity onPress={this.handleProfile}>
 							<Image
 								source={require('../.././assets/icon/user.png')}
@@ -89,7 +89,7 @@ class Recommendation extends React.Component {
 						</TouchableOpacity>
 					</View>
 					
-					<View style={{flex: 1, paddingLeft: 130}}>
+					<View style={{paddingLeft: 148, paddingTop: 42}}>
 						<TouchableOpacity onPress={this.handleSetting}>
 							<Image
 								source={require('../.././assets/icon/setting.png')}
@@ -123,9 +123,9 @@ class Recommendation extends React.Component {
 					</View>
 					
 					<ScrollView>
-						
+						<TouchableOpacity onPress={this.handleDescription}>
               <RecomRest />
-            
+            </TouchableOpacity>
 					</ScrollView>
 						
 				</View>
@@ -157,17 +157,16 @@ const styles = StyleSheet.create({
 		flex: 1,
     backgroundColor: '#ffffff',
 		width: '100%',
-		height: '90%',
+		height: '88%',
 	},
 	header: {
-		flexDirection:'row',
-		backgroundColor: "#1a2e35",
+    flexDirection: 'row',
+    backgroundColor: "#1a2e35",
 		width: '100%',
-		height: '10%',
-		position: "relative",
-		top: 0,
-		paddingLeft: 15,
-		paddingTop: 38,
+		height: '12%',
+		justifyContent: "center",
+    position: 'relative',
+    top: 0,
 	},
 	distanceSlider: {
 		width: 405,

@@ -28,7 +28,7 @@ class Profile extends React.Component {
 		return (
       <View style={styles.container}>
 				<View style={styles.header}>
-					<View>
+					<View style={{paddingTop: 42, paddingRight: 160}}>
 						<TouchableOpacity onPress={this.handleBack}>
 							<Image
 								source={require('../.././assets/icon/left_arrow.png')}
@@ -36,13 +36,14 @@ class Profile extends React.Component {
 								/>	
 						</TouchableOpacity>
 					</View>
-					<View style={styles.LogOut}>
-					<TouchableOpacity onPress={this.handleSignOut}>
-					<Image 
-								source={require('../.././assets/icon/sign_out.png')}
-								style={{width:28, height: 28,}}
-							/>		
-					</TouchableOpacity>
+					
+          <View style={{paddingTop: 42, paddingLeft: 160}}>
+            <TouchableOpacity onPress={this.handleSignOut}>
+              <Image 
+                source={require('../.././assets/icon/sign_out.png')}
+                style={{width:25, height: 25}}
+                />		
+            </TouchableOpacity>
 					</View>
 				</View>
 				
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
 	body: {
 		backgroundColor: 'white',
 		width: '100%',
-		height: '90%',
+		height: '88%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -161,38 +162,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 15,
 	},
-	CTA: {
-		color: '#fff',
-		fontWeight: '500',
-		fontSize: 28,
-		paddingLeft: 150,
-		paddingTop: 10,
-	},
 	header: {
-		flexDirection:'row',
-		backgroundColor: "#1a2e35",
-		width: '100%',
-		height: '10%',
-		position: "relative",
-		top: 0,
-		paddingLeft: 15,
-		paddingTop: 38,
-	},
-	footer: {
-		flexDirection:'row',
-		backgroundColor: "#1a2e35",
-		width: '100%',
-		height: '8%',
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-	},
-	LogOut: {
-		flex: 1,
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-		paddingBottom: 10,
-		paddingRight: 15,
-	}
+    backgroundColor: "#1a2e35",
+		width: '100%',
+		height: '12%',
+		justifyContent: "center",
+    position: 'relative',
+    top: 0,
+	},
 });

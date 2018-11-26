@@ -17,17 +17,20 @@ class Preference extends React.Component {
 	
 	render() {
 		return (
-      <View style={styles.container}>
-        
-				<View style={styles.header}>
-				</View>
+      <View style={styles.container}>			
 				
 				<View style={styles.body}>
-					<Text style={styles.prefTitle}>How many people are in your group?</Text>
+          <Text style={styles.extraTitle}>WELCOME TO YOUGO</Text>
+          
+          <Text style={styles.smallTitle}>WE GIVE THE BEST{"\n"}RESTAURANT RECOMMENDATIONS{"\n"}______________________</Text>
+          
+          <Text style={styles.startTitle}>LETS GET STARTED!</Text>
+                    
+					<Text style={styles.prefTitle}>How many people are there?</Text>
 
 					<TextInput
 						style={styles.input}
-						placeholder="No. of People"
+						placeholder="0"
 						placeholderTextColor="grey"
 						autoCapitalize="none"
 						underlineColorAndroid='transparent'
@@ -58,7 +61,7 @@ function grabVar(state){
 export default connect(grabVar)(Preference);
 
 const styles = StyleSheet.create({
-  container: {
+   container: {
     flex: 1,
 		backgroundColor: '#ffffff',
 		width: '100%',
@@ -67,9 +70,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
   },
 	body: {
-		backgroundColor: '#ffffff',
+		backgroundColor: '#1a2e35',
 		width: '100%',
-		height: '90%',
+		height: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -77,29 +80,55 @@ const styles = StyleSheet.create({
 		backgroundColor: 'black',
 		marginBottom: 20,
 	},
-	prefTitle: {
-		color: '#1a2e35',
+    startTitle: {
+		color: '#ffffff',
 		fontWeight: '500',
-		fontSize: 23,
+		fontSize: 22,
+		marginBottom: 30,
+        textAlign:'center',
+	},
+    smallTitle: {
+		color: '#ffffff',
+		fontWeight: '300',
+		fontSize: 16,
+		marginBottom: 30,
+        textAlign:'center',
+	},
+    extraTitle: {
+		color: '#ffffff',
+		fontWeight: '300',
+		fontSize: 26,
 		marginBottom: 30,
 	},
-	input: {
+	prefTitle: {
+		color: '#ffffff',
+		fontWeight: '400',
+		fontSize: 26,
 		marginBottom: 30,
-		width: 125,
-		height: 50,
+		marginTop: 40,
+	},
+	input: {
+        borderRadius: 10,
+		fontSize: 42,
+		marginBottom: 30,
+		marginTop: 30,
+		width: 75,
+		height: 75,
 		borderColor: '#45d8d5',
-		borderWidth: 1,
+		borderWidth: 4,
 		backgroundColor: 'white',
 		paddingRight: 20,
-		paddingLeft: 20,
+		paddingLeft: 25,
 		paddingTop: 5,
 		paddingBottom: 5,
 	},
 	button: {
+    borderRadius: 10,
 		width: 250,
 		height: 50,
-		backgroundColor: "#1a2e35", 
-		marginBottom: 20,
+		backgroundColor: "#45d8d5",
+		marginTop: 80,
+		marginBottom: 10,
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -113,9 +142,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 	header: {
-		backgroundColor: "#1a2e35",
+		//backgroundColor: "rgba(26, 46, 53, 1.0)",
 		width: '100%',
-		height: '10%',
+		height: '15%',
 		justifyContent: "center",
 		position: "relative",
 		top: 0,

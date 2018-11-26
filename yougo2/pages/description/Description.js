@@ -23,14 +23,14 @@ class Description extends React.Component {
 		return (
       <View style={styles.container}>
 				<View style={styles.header}>
-					<View>
-						<TouchableOpacity onPress={this.handleBack}>
-							<Image
-								source={require('../.././assets/icon/left_arrow.png')}
-								style={{width: 25, height: 25}}
-								/>
-						</TouchableOpacity>
-					</View>
+					<View style={{paddingTop: 42, paddingRight: 345}}>
+            <TouchableOpacity onPress={this.handleBack}>
+              <Image
+                source={require('../.././assets/icon/left_arrow.png')}
+                style={{width: 25, height: 25}}
+                />
+            </TouchableOpacity>
+          </View>
 				</View>
 				
 				<View style={styles.body}>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 	body: {
 		backgroundColor: '#ffffff',
 		width: '100%',
-		height: '90%',
+		height: '88%',
 	},
 	imgSlider: {
 		width: '100%',
@@ -117,14 +117,13 @@ const styles = StyleSheet.create({
 		paddingTop: 15,
 	},
 	header: {
-		flexDirection:'row',
-		backgroundColor: "#1a2e35",
+    flexDirection: 'row',
+    backgroundColor: "#1a2e35",
 		width: '100%',
-		height: '10%',
-		position: "relative",
-		top: 0,
-		paddingLeft: 15,
-		paddingTop: 38,
+		height: '12%',
+		justifyContent: "center",
+    position: 'relative',
+    top: 0,
 	},
 	footer: {
 		flexDirection:'row',
