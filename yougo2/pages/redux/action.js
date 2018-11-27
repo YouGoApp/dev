@@ -32,3 +32,17 @@ export function ChangeRest(result){
 		result:result
 	}
 }
+
+export function ChangeSearchUrl(searchUrl) {
+	return {
+		type: "CHANGE_SEARCH_URL",
+		searchUrl: searchUrl
+	}
+}
+
+export function SetSelectedIndex(selectedIndex) {
+	return {
+		type: "SET_SELECTED_INDEX",
+		selectedIndex: selectedIndex
+	}
+}
