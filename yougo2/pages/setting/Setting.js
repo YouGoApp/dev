@@ -1,32 +1,46 @@
 import React from 'react';
-import { StyleSheet, Text, View, CheckBox, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, CheckBox, TouchableOpacity, Image, Button } from 'react-native';
 
 import { connect } from 'react-redux';
-import { ChangePage, ChangeList } from '.././redux/action';
+import { ChangePage, ChangeList, ChangeRest } from '.././redux/action';
 
 class Setting extends React.Component {
-  
+
 	state = {
 		sorting: [
 			true, false, false
 		],
 		isDisabled: false
 	}
-	
-	handleSort=(i)=>{
+
+	sortBy = (arr, attr) => {
+		arr.sort((a, b) => {
+			var x = a[attr] || 0;
+			var y = b[attr] || 0;
+			if (x < y) {return -1;}
+			if (x > y) {return 1;}
+			return 0;
+	});
+
+		this.props.dispatch(ChangeRest(arr));
+	}
+
+	handleSort = (i) => {
+		var attr = i === 1 ? 'price_level' : (i === 2 ? 'rating' : null);
+
 		var t = 0;
-		
+
 		var arr = this.state.sorting;
 		arr[i] = !arr[i];
-		
-		for (var i=0; i<arr.length; i++) {
-			if(arr[i] == 1){
-				t++;	
+
+		for (var i = 0; i < arr.length; i++) {
+			if (arr[i] == 1) {
+				t++;
 			}
 		}
-		
-		for (var i=0; i<arr.length; i++) {
-			if(t >= 1){
+
+		for (var i = 0; i < arr.length; i++) {
+			if (t >= 1) {
 				this.setState({
 					isDisabled: true
 				})
@@ -36,54 +50,60 @@ class Setting extends React.Component {
 				})
 			}
 		}
-		
+
 		this.setState({
-			sorting:arr
-		})
+			sorting: arr
+		});
+
+		if (this.props.restList && this.props.restList.length && attr) {
+			var clonedArr = this.props.restList.slice();
+			this.sortBy(clonedArr, attr);
+		}
 	}
-	
+
 	render() {
-    return (
-      
-			<View style={{padding: 10, justifyContent: 'center', alignItems: 'center'}}>
-			  <View style={{flexDirection: 'row'}}>
-					<View style={{flexDirection: 'row'}}>
+		return (
+
+			<View style={{ padding: 10, justifyContent: 'center', alignItems: 'center' }}>
+				<View style={{ flexDirection: 'row' }}>
+					<View style={{ flexDirection: 'row' }}>
 						<CheckBox
 							onValueChange={this.handleSort.bind(this, 0)}
 							disabled={this.state.isDisabled && !this.state.sorting[0]}
 							value={this.state.sorting[0]}
-							/>
-						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Distance</Text>
+						/>
+						<Text style={{ marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16 }}>Distance</Text>
 					</View>
 
-					<View style={{flexDirection: 'row'}}>
+					<View style={{ flexDirection: 'row' }}>
 						<CheckBox
 							onValueChange={this.handleSort.bind(this, 1)}
 							disabled={this.state.isDisabled && !this.state.sorting[1]}
 							value={this.state.sorting[1]}
-							/>
-						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Price</Text>
+						/>
+						<Text style={{ marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16 }}>Price</Text>
 					</View>
 
-					<View style={{flexDirection: 'row'}}>
+					<View style={{ flexDirection: 'row' }}>
 						<CheckBox
 							onValueChange={this.handleSort.bind(this, 2)}
-							disabled={this.state.isDisabled && !this.state.sorting[2]} 
+							disabled={this.state.isDisabled && !this.state.sorting[2]}
 							value={this.state.sorting[2]}
-							/>
-						<Text style={{marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16}}>Rating</Text>
+						/>
+						<Text style={{ marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16 }}>Rating</Text>
 					</View>
 				</View>
-				
-      </View>
-    );
-  }
+
+			</View>
+		);
+	}
 }
 
-function grabVar(state){
+function grabVar(state) {
 	return {
 		mainPage: state.Page.page,
-		mainList: state.Page.listRest
+		mainList: state.Page.listRest,
+		restList: state.Page.result
 	}
 }
 
