@@ -15,25 +15,25 @@ class Items extends React.Component {
             <View style={{flexDirection: 'row', paddingTop: 10}}>
               
               <View style={{width: '95%'}}>
-                <View style={{paddingBottom: 17}}>
-                  <Text style={{fontWeight: 'bold'}}>{this.props.obj.name}</Text>
+                <View>
+                  <Text style={{fontWeight: 'bold', fontSize: 24}}>{this.props.obj.name}</Text>
                 </View>
 
-                <View style={{paddingBottom: 17}}>
-                  <Text>Ratings: {this.props.obj.rating}</Text>
-                </View>
-
-                <View style={{paddingBottom: 17}}>
-                  <Text>Price Level: {this.props.obj.price_level}</Text>
+                <View style={{marginTop: 10}}>
+                  <Text style={{fontSize: 14}}>Price Level: {this.props.obj.price_level}</Text>
                 </View>
                 
-                <View>
-                  <Text>Address: {this.props.obj.vicinity}</Text>
+                <View style={{marginTop: 10}}>
+                  <Text style={{fontSize: 14}}>Address: {this.props.obj.vicinity}</Text>
                 </View>
               </View>
               
-              <View style={{flex: 1, width: '5%', justifyContent: "center", alignItems: "center"}}>
-                <Image
+              <View style={{flex: 1, width: '5%', alignItems: "center"}}>
+                <View style={{width: 40, height: 30, padding: 3, backgroundColor: '#1a2e35', marginBottom: 25, marginTop: 5}}>
+                  <Text style={{fontSize: 18, color: '#fff', fontWeight: 'bold', textAlign: 'center'}}>{this.props.obj.rating}</Text>
+                </View>
+								
+								<Image
                   source={require('../.././assets/icon/right_arrow_black.png')}
                   style={{width: 20}}
                   />
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
 		flex: 1,
     flexDirection: 'row',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: '#fff',
 		width: '97%',
 		height: 150,
 		paddingLeft: 15,

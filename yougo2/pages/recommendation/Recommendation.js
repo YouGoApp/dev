@@ -119,12 +119,16 @@ class Recommendation extends React.Component {
 						{setting}
 					</View>
 
-					<View style={{ borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff" }}>
-						<View style={{ flexDirection: 'row', paddingTop: 10 }}>
-							<Text style={{ paddingBottom: 10, paddingLeft: 15, fontSize: 17 }}>Distance</Text>
-							<Text
-								style={{ width: 60, height: 25, paddingLeft: 10, paddingRight: 10, paddingTop: 2, marginTop: 1, marginLeft: 247, borderWidth: 0.5, borderColor: 'grey', justifyContent: 'center', alignItems: 'center' }}
-							>{this.state.distance} km</Text>
+					<View style={{ borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff"}}>
+						<View style={{ flexDirection: 'row', paddingTop: 10, width: "100%"}}>
+							<View style={{width: "80%"}}>
+								<Text style={{ paddingBottom: 10, paddingLeft: 15, fontSize: 17 }}>Distance</Text>
+							</View>
+							<View style={{width: "20%"}}>
+								<Text
+									style={{ width: 60, height: 25, paddingLeft: 10, paddingRight: 10, paddingTop: 2, marginTop: 1, borderWidth: 0.5, borderColor: '#45d8d5', justifyContent: 'center', alignItems: 'center' }}
+								>{this.state.distance} km</Text>
+							</View>
 						</View>
 						<Slider
 							onValueChange={val => this.onDistanceChange(val)}
@@ -183,7 +187,7 @@ const styles = StyleSheet.create({
 		top: 0,
 	},
 	distanceSlider: {
-		width: 405,
+		width: '100%',
 		backgroundColor: "#ffffff",
 	}
 });

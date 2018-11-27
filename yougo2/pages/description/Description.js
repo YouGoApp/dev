@@ -60,7 +60,7 @@ class Description extends React.Component {
 	}
 
 	getDetails = async (id) => {
-		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,formatted_address,formatted_phone_number,reviews&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
+		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,vicinity,formatted_phone_number,reviews&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
 		var resp = await fetch(searchUrl);
 		var json = await resp.json();
 		const result = json.result;
@@ -69,7 +69,7 @@ class Description extends React.Component {
 			let details = {
 				address: result.formatted_address,
 				phone: result.formatted_phone_number,
-				address: result.formatted_address,
+				address: result.vicinity,
 				description: result.reviews.length > 0 ? result.reviews[0].text : 'No description'
 			};
 
@@ -103,10 +103,21 @@ class Description extends React.Component {
 					</View>
 					<ScrollView>
 						<Text style={styles.prefTitle}>{selectedItem.name}</Text>
-						<Text style={styles.subTitle}>{this.state.details.address}</Text>
-						<Text style={styles.subTitle}>{this.state.details.phone}</Text>
-						<Text style={styles.subTitle}>{this.state.details.email}</Text>
-						<Text style={styles.subTitle}>{this.state.details.description}</Text>
+						<View style={{alignItems:"center"}}>
+							<View
+								style={styles.descLines}
+								/>
+						</View>			
+						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Address:</Text> {this.state.details.address}</Text>
+						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Phone:</Text> {this.state.details.phone}</Text>
+						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Opening Hours:</Text> Change this part to Opening Hours</Text>
+						<View style={{alignItems:"center"}}>
+							<View
+								style={styles.descLines}
+								/>
+						</View>
+						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Reviews:</Text></Text>
+						<Text style={{paddingLeft: 15, paddingRight: 15}}>{this.state.details.description}</Text>
 					</ScrollView>
 				</View>
 
@@ -148,6 +159,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#ffffff',
 		width: '100%',
 		height: '88%',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	imgSlider: {
 		width: '100%',
@@ -157,16 +170,27 @@ const styles = StyleSheet.create({
 		color: '#1a2e35',
 		fontWeight: '500',
 		fontSize: 28,
-		paddingBottom: 15,
+		paddingBottom: 5,
 		paddingLeft: 15,
 		paddingTop: 10,
+		paddingRight: 15,
 	},
 	subTitle: {
 		color: '#1a2e35',
-		fontSize: 18,
-		paddingBottom: 15,
+		fontSize: 14,
+		paddingBottom: 10,
 		paddingLeft: 15,
-		paddingTop: 10,
+		paddingTop: 5,
+		paddingRight: 15,
+	},
+	descLines: {
+		width: '95%',
+		borderBottomColor: '#1a2e35',
+		borderBottomWidth: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginTop: 5,
+		marginBottom: 5,
 	},
 	CTA: {
 		color: '#fff',

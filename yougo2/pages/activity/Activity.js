@@ -58,7 +58,7 @@ class Activity extends React.Component {
 		}
 
 		for (var i = 0; i < arr.length; i++) {
-			if (t >= 3) {
+			if (t >= 5) {
 				this.setState({
 					isDisabled: true
 				})
@@ -124,7 +124,7 @@ class Activity extends React.Component {
 
 					<Text style={styles.prefTitle}>Select the cuisines that you prefer</Text>
 
-					<Text style={styles.prefSubTit}>Select up to 3 cuisines</Text>
+					<Text style={styles.prefSubTit}>Select up to 5 cuisines</Text>
 
 					<ScrollView contentContainerStyle={styles.contentContainer}>
 						<View>
