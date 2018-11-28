@@ -13,12 +13,15 @@ class Setting extends React.Component {
 		isDisabled: false
 	}
 
-	sortBy = (arr, attr) => {
+	sortBy = (arr, attr, isDecrease) => {
+		const smaller = isDecrease ? 1 : -1;
+		const greater = isDecrease ? -1 : 1;
+
 		arr.sort((a, b) => {
 			var x = a[attr] || 0;
 			var y = b[attr] || 0;
-			if (x < y) {return -1;}
-			if (x > y) {return 1;}
+			if (x < y) {return smaller;}
+			if (x > y) {return greater;}
 			return 0;
 	});
 
@@ -27,7 +30,7 @@ class Setting extends React.Component {
 
 	handleSort = (i) => {
 		var attr = i === 1 ? 'price_level' : (i === 2 ? 'rating' : null);
-
+		const isDecrease = i === 2;
 		var t = 0;
 
 		var arr = this.state.sorting;
@@ -57,7 +60,7 @@ class Setting extends React.Component {
 
 		if (this.props.restList && this.props.restList.length && attr) {
 			var clonedArr = this.props.restList.slice();
-			this.sortBy(clonedArr, attr);
+			this.sortBy(clonedArr, attr, isDecrease);
 		}
 	}
 
