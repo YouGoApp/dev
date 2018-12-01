@@ -5,7 +5,9 @@ const pageDefault = {
 	distance: "",
 	result: [],
 	searchUrl: '',
-	selectedIndex: 0
+	selectedIndex: 0,
+	sortIndex: 0,
+	user: null
 };
 
 export function Page(state = pageDefault, action) {
@@ -38,6 +40,12 @@ export function Page(state = pageDefault, action) {
 			obj.selectedIndex = action.selectedIndex;
 			return obj;
 
+		case 'SET_SORT_INDEX':
+			obj.sortIndex = action.sortIndex;
+			return obj;
+		case 'SET_USER':
+			obj.user = action.user;
+			return obj;
 		default:
 			return state;
 	}

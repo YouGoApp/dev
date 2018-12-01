@@ -9,6 +9,8 @@ import Recommendation from '.././recommendation/Recommendation';
 import Profile from '.././profile/Profile';
 
 class Description extends React.Component {
+	BASE_URL = 'https://yougoapp.herokuapp.com/';
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -25,7 +27,38 @@ class Description extends React.Component {
 	componentDidMount() {
 		const selectedItem = this.props.restList[this.props.selectedIndex];
 		this.getImages(selectedItem.photos);
-		this.getDetails(selectedItem.place_id);
+		this.getDetails(selectedItem);
+	}
+
+	saveHistory = (selectedItem, details, place_id) => {
+		const api = this.BASE_URL + 'inserthistories.php';
+
+		var fd = new FormData();
+		fd.append("username", this.props.user.username);
+		fd.append("name", selectedItem.name);
+		fd.append("address", details.address);
+		fd.append("latitude", selectedItem.geometry.location.lat);
+		fd.append("longitude", selectedItem.geometry.location.lng);
+		fd.append("place_id", place_id);
+
+		let images = [];
+
+		for (let i = 0; i < selectedItem.photos.length; i++) {
+			images.push(selectedItem.photos[i].photo_reference);
+		}
+
+		fd.append("photo_references",  JSON.stringify(images));
+
+		fetch(api, {
+			method: "POST",
+			body: fd
+		}).then((resp) => {
+			return resp.json();
+		}).then((json) => {
+			console.log(json);
+		}).catch((error) => {
+			console.error(error);
+		});
 	}
 
 	handleBack = () => {
@@ -59,7 +92,8 @@ class Description extends React.Component {
 		this.setState({ images: images });
 	}
 
-	getDetails = async (id) => {
+	getDetails = async (selectedItem) => {
+		const id = selectedItem.place_id;
 		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,vicinity,formatted_phone_number,reviews&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
 		var resp = await fetch(searchUrl);
 		var json = await resp.json();
@@ -69,11 +103,11 @@ class Description extends React.Component {
 			let details = {
 				address: result.formatted_address,
 				phone: result.formatted_phone_number,
-				address: result.vicinity,
 				description: result.reviews.length > 0 ? result.reviews[0].text : 'No description'
 			};
 
 			this.setState({ details: details });
+			this.saveHistory(selectedItem, details, id);
 		}
 	}
 
@@ -103,21 +137,21 @@ class Description extends React.Component {
 					</View>
 					<ScrollView>
 						<Text style={styles.prefTitle}>{selectedItem.name}</Text>
-						<View style={{alignItems:"center"}}>
+						<View style={{ alignItems: "center" }}>
 							<View
 								style={styles.descLines}
-								/>
-						</View>			
-						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Address:</Text> {this.state.details.address}</Text>
-						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Phone:</Text> {this.state.details.phone}</Text>
-						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Opening Hours:</Text> Change this part to Opening Hours</Text>
-						<View style={{alignItems:"center"}}>
-							<View
-								style={styles.descLines}
-								/>
+							/>
 						</View>
-						<Text style={styles.subTitle}><Text style={{fontWeight: 'bold'}}>Reviews:</Text></Text>
-						<Text style={{paddingLeft: 15, paddingRight: 15}}>{this.state.details.description}</Text>
+						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {this.state.details.address}</Text>
+						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Phone:</Text> {this.state.details.phone}</Text>
+						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> Change this part to Opening Hours</Text>
+						<View style={{ alignItems: "center" }}>
+							<View
+								style={styles.descLines}
+							/>
+						</View>
+						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Reviews:</Text></Text>
+						<Text style={{ paddingLeft: 15, paddingRight: 15 }}>{this.state.details.description}</Text>
 					</ScrollView>
 				</View>
 
@@ -127,7 +161,6 @@ class Description extends React.Component {
 							<Text style={styles.CTA}>Get Directions</Text>
 						</TouchableOpacity>
 					</View>
-
 				</View>
 
 			</View>
@@ -140,7 +173,8 @@ function grabVar(state) {
 		mainPage: state.Page.page,
 		mainList: state.Page.listRest,
 		selectedIndex: state.Page.selectedIndex,
-		restList: state.Page.result
+		restList: state.Page.result,
+		user: state.Page.user
 	}
 }
 

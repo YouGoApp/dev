@@ -46,3 +46,17 @@ export function SetSelectedIndex(selectedIndex) {
 		selectedIndex: selectedIndex
 	}
 }
+
+export function SetSortIndex(sortIndex) {
+	return {
+		type: "SET_SORT_INDEX",
+		sortIndex: sortIndex
+	}
+}
+
+export function SetUser(user) {
+	return {
+		type: "SET_USER",
+		user: user
+	}
+}

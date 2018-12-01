@@ -2,13 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
-import { ChangePage, ChangeList, ChangeDistance, ChangeRest, SetSelectedIndex } from '.././redux/action';
+import { ChangePage, ChangeList, ChangeDistance, ChangeRest, SetSelectedIndex, SetSortIndex } from '.././redux/action';
 
 import Activity from '.././activity/Activity';
 import Description from '.././description/Description';
 import Setting from '.././setting/Setting';
 import RecomRest from '.././recomRest/RecomRest';
 import Profile from '.././profile/Profile';
+import { throttle } from 'throttle-debounce';
 
 class Recommendation extends React.Component {
 
@@ -50,16 +51,37 @@ class Recommendation extends React.Component {
 		}
 	}
 
-	reloadData = async (distance) => {
-		this.setState({ distance: distance, isLoading: true });
+	sortBy = (arr, attr, isDecrease) => {
+		const smaller = isDecrease ? 1 : -1;
+		const greater = isDecrease ? -1 : 1;
+
+		arr.sort((a, b) => {
+			var x = a[attr] || 0;
+			var y = b[attr] || 0;
+			if (x < y) { return smaller; }
+			if (x > y) { return greater; }
+			return 0;
+		});
+
+		this.props.dispatch(ChangeRest(arr));
+	}
+
+	reloadData = async () => {
+		const distance = this.state.distance;
 		var resp = await fetch(this.props.searchUrl + "&radius=" + distance * 1000);
 		var json = await resp.json();
-		this.props.dispatch(ChangeRest(json.results));
-		this.setState({ isLoading: false });
+		var attr = this.props.sortIndex === 1 ? 'price_level' : (this.props.sortIndex === 2 ? 'rating' : null);
+		const isDecrease = this.props.sortIndex === 2;
+
+		if (json.results && json.results.length && attr) {
+			var clonedArr = json.results.slice();
+			this.sortBy(clonedArr, attr, isDecrease);
+		}
 	}
 
 	onDistanceChange = (distance) => {
-		this.reloadData(distance);
+		this.setState({ distance: distance });
+		throttle(500, this.reloadData());
 	}
 
 	handleDescription = (obj, index) => {
@@ -119,12 +141,12 @@ class Recommendation extends React.Component {
 						{setting}
 					</View>
 
-					<View style={{ borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff"}}>
-						<View style={{ flexDirection: 'row', paddingTop: 10, width: "100%"}}>
-							<View style={{width: "80%"}}>
+					<View style={{ borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff" }}>
+						<View style={{ flexDirection: 'row', paddingTop: 10, width: "100%" }}>
+							<View style={{ width: "80%" }}>
 								<Text style={{ paddingBottom: 10, paddingLeft: 15, fontSize: 17 }}>Distance</Text>
 							</View>
-							<View style={{width: "20%"}}>
+							<View style={{ width: "20%" }}>
 								<Text
 									style={{ width: 60, height: 25, paddingLeft: 10, paddingRight: 10, paddingTop: 2, marginTop: 1, borderWidth: 0.5, borderColor: '#45d8d5', justifyContent: 'center', alignItems: 'center' }}
 								>{this.state.distance} km</Text>
@@ -142,7 +164,7 @@ class Recommendation extends React.Component {
 					</View>
 
 					<ScrollView>
-						<RecomRest handleDescription={this.handleDescription}/>
+						<RecomRest handleDescription={this.handleDescription} />
 					</ScrollView>
 
 				</View>
@@ -156,7 +178,9 @@ function grabVar(state) {
 	return {
 		mainPage: state.Page.page,
 		mainList: state.Page.listRest,
-		searchUrl: state.Page.searchUrl
+		searchUrl: state.Page.searchUrl,
+		sortIndex: state.Page.sortIndex,
+		restList: state.Page.result
 	}
 }
 
