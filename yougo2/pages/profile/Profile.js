@@ -127,7 +127,7 @@ class Profile extends React.Component {
 							</TouchableOpacity>
 						</View>
 						{this.state.uploading && (<Text>Uploading...</Text>)}
-						<Text style={styles.prefTitle}>@{this.props.user.username}</Text>
+						<Text style={styles.prefTitle}>{this.props.user.username}</Text>
 
 
 					</View>

@@ -86,7 +86,6 @@ class Setting extends React.Component {
 							disabled={this.state.isDisabled && !this.state.sorting[1]}
 							value={this.state.sorting[1]}
 						/>
-						<Button title="Price" onPress={this.handleSort.bind(this, 1)}></Button>
 						<Text style={{ marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16 }}>Price</Text>
 					</View>
 
@@ -96,7 +95,6 @@ class Setting extends React.Component {
 							disabled={this.state.isDisabled && !this.state.sorting[2]}
 							value={this.state.sorting[2]}
 						/>
-						<Button title="Rating" onPress={this.handleSort.bind(this, 2)}></Button>
 						<Text style={{ marginTop: 4, color: 'white', fontWeight: 'bold', fontSize: 16 }}>Rating</Text>
 					</View>
 				</View>
