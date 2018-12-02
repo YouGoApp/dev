@@ -3,33 +3,49 @@ const pageDefault = {
 	numPeople: "",
 	listRest: "",
 	distance: "",
-  result: []
+	result: [],
+	searchUrl: '',
+	selectedIndex: 0,
+	sortIndex: 0,
+	user: null
 };
 
-export function Page(state = pageDefault, action){
-	let obj= Object.assign({}, state);
-	
-	switch(action.type){
+export function Page(state = pageDefault, action) {
+	let obj = Object.assign({}, state);
+
+	switch (action.type) {
 		case "CHANGE_PAGE":
 			obj.page = action.page;
 			return obj;
-			
+
 		case "CHANGE_PEOPLE":
 			obj.numPeople = action.numPeople;
 			return obj;
-			
+
 		case "CHANGE_LIST":
 			obj.listRest = action.listRest;
 			return obj;
-			
+
 		case "CHANGE_DISTANCE":
 			obj.distance = action.distance;
 			return obj;
-      
-    case "CHANGE_REST":
+
+		case "CHANGE_REST":
 			obj.result = action.result;
 			return obj;
-      
+		case 'CHANGE_SEARCH_URL':
+			obj.searchUrl = action.searchUrl;
+			return obj;
+		case 'SET_SELECTED_INDEX':
+			obj.selectedIndex = action.selectedIndex;
+			return obj;
+
+		case 'SET_SORT_INDEX':
+			obj.sortIndex = action.sortIndex;
+			return obj;
+		case 'SET_USER':
+			obj.user = action.user;
+			return obj;
 		default:
 			return state;
 	}

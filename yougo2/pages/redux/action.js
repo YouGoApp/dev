@@ -32,3 +32,31 @@ export function ChangeRest(result){
 		result:result
 	}
 }
+
+export function ChangeSearchUrl(searchUrl) {
+	return {
+		type: "CHANGE_SEARCH_URL",
+		searchUrl: searchUrl
+	}
+}
+
+export function SetSelectedIndex(selectedIndex) {
+	return {
+		type: "SET_SELECTED_INDEX",
+		selectedIndex: selectedIndex
+	}
+}
+
+export function SetSortIndex(sortIndex) {
+	return {
+		type: "SET_SORT_INDEX",
+		sortIndex: sortIndex
+	}
+}
+
+export function SetUser(user) {
+	return {
+		type: "SET_USER",
+		user: user
+	}
+}

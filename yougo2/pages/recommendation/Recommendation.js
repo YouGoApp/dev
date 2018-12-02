@@ -2,44 +2,42 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image, Slider, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
-import { ChangePage, ChangeList, ChangeDistance } from '.././redux/action';
+import { ChangePage, ChangeList, ChangeDistance, ChangeRest, SetSelectedIndex, SetSortIndex } from '.././redux/action';
 
 import Activity from '.././activity/Activity';
 import Description from '.././description/Description';
 import Setting from '.././setting/Setting';
 import RecomRest from '.././recomRest/RecomRest';
 import Profile from '.././profile/Profile';
+import { throttle } from 'throttle-debounce';
 
 class Recommendation extends React.Component {
- 	
-	onoff= 0;
-	
-	state={
+
+	onoff = 0;
+
+	state = {
 		setting: false
 	}
-	
-	constructor(props){
+
+	constructor(props) {
 		super(props);
 		this.state = {
 			switchValue: true,
-			distance: 5
+			distance: 5,
+			isLoading: false
 		}
 	}
-	
-	handleBack=()=>{
+
+	handleBack = () => {
 		this.props.navigation.navigate('Activity')
 	}
-	
-	handleProfile=()=>{
+
+	handleProfile = () => {
 		this.props.navigation.navigate('Profile')
 	}
-  
-  handleDescription=()=>{
-    this.props.navigation.navigate('Description')
-  }
-	
-	handleSetting=()=>{	
-		if(this.onoff === 0){
+
+	handleSetting = () => {
+		if (this.onoff === 0) {
 			this.setState({
 				setting: true
 			});
@@ -50,126 +48,170 @@ class Recommendation extends React.Component {
 				setting: false
 			})
 			this.onoff = 0;
-		}	
+		}
 	}
-  
+
+	sortBy = (arr, attr, isDecrease) => {
+		const smaller = isDecrease ? 1 : -1;
+		const greater = isDecrease ? -1 : 1;
+
+		arr.sort((a, b) => {
+			var x = a[attr] || 0;
+			var y = b[attr] || 0;
+			if (x < y) { return smaller; }
+			if (x > y) { return greater; }
+			return 0;
+		});
+
+		this.props.dispatch(ChangeRest(arr));
+	}
+
+	reloadData = async () => {
+		const distance = this.state.distance;
+		var resp = await fetch(this.props.searchUrl + "&radius=" + distance * 1000);
+		var json = await resp.json();
+		var attr = this.props.sortIndex === 1 ? 'price_level' : (this.props.sortIndex === 2 ? 'rating' : null);
+		const isDecrease = this.props.sortIndex === 2;
+
+		if (json.results && json.results.length && attr) {
+			var clonedArr = json.results.slice();
+			this.sortBy(clonedArr, attr, isDecrease);
+		}
+	}
+
+	onDistanceChange = (distance) => {
+		this.setState({ distance: distance });
+		throttle(500, this.reloadData());
+	}
+
+	handleDescription = (obj, index) => {
+		this.props.dispatch(SetSelectedIndex(index));
+		this.props.navigation.navigate('Description')
+	}
+
 	render() {
-		
+
 		var setting = null;
-		if(this.state.setting === true){
+		if (this.state.setting === true) {
 			setting = (
-				<View style={{width: '100%'}}>
+				<View style={{ width: '100%' }}>
 					<Setting />
 				</View>
 			)
 		} else {
 			setting = null;
 		}
-    
+
 		return (
-			
+
 			<View style={styles.container}>
-        
+
 				<View style={styles.header}>
-					<View style={{paddingRight: 148, paddingTop: 42}}>
+					<View style={{ paddingRight: 148, paddingTop: 42 }}>
 						<TouchableOpacity onPress={this.handleBack}>
 							<Image
 								source={require('../.././assets/icon/left_arrow.png')}
-								style={{width: 25, height: 25}}
-								/>
+								style={{ width: 25, height: 25 }}
+							/>
 						</TouchableOpacity>
 					</View>
-					
-					<View style={{paddingTop: 42}}>
+
+					<View style={{ paddingTop: 42 }}>
 						<TouchableOpacity onPress={this.handleProfile}>
 							<Image
 								source={require('../.././assets/icon/user.png')}
-								style={{width: 25, height: 25}}
-								/>
+								style={{ width: 25, height: 25 }}
+							/>
 						</TouchableOpacity>
 					</View>
-					
-					<View style={{paddingLeft: 148, paddingTop: 42}}>
+
+					<View style={{ paddingLeft: 148, paddingTop: 42 }}>
 						<TouchableOpacity onPress={this.handleSetting}>
 							<Image
 								source={require('../.././assets/icon/setting.png')}
-								style={{width: 25, height: 25}}
-								/>
+								style={{ width: 25, height: 25 }}
+							/>
 						</TouchableOpacity>
 					</View>
 				</View>
-				
+
 				<View style={styles.body}>
-					
-					<View style={{backgroundColor: 'rgba(26,46,53,0.85)'}}>
+
+					<View style={{ backgroundColor: 'rgba(26,46,53,0.85)' }}>
 						{setting}
 					</View>
-					
-					<View style={{borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff"}}>
-						<View style={{flexDirection: 'row', paddingTop: 10}}>
-							<Text style={{paddingBottom: 10, paddingLeft: 15, fontSize: 17}}>Distance</Text>
-							<Text
-								style={{width: 60, height: 25, paddingLeft: 10, paddingRight: 10, paddingTop: 2, marginTop: 1, marginLeft: 247, borderWidth: 0.5, borderColor: 'grey', justifyContent: 'center', alignItems: 'center'}}
+
+					<View style={{ borderWidth: 0.5, borderColor: 'grey', paddingBottom: 10, backgroundColor: "#ffffff" }}>
+						<View style={{ flexDirection: 'row', paddingTop: 10, width: "100%" }}>
+							<View style={{ width: "80%" }}>
+								<Text style={{ paddingBottom: 10, paddingLeft: 15, fontSize: 17 }}>Distance</Text>
+							</View>
+							<View style={{ width: "20%" }}>
+								<Text
+									style={{ width: 60, height: 25, paddingLeft: 10, paddingRight: 10, paddingTop: 2, marginTop: 1, borderWidth: 0.5, borderColor: '#45d8d5', justifyContent: 'center', alignItems: 'center' }}
 								>{this.state.distance} km</Text>
+							</View>
 						</View>
 						<Slider
-							onValueChange={val => this.setState({ distance: val })}
+							onValueChange={val => this.onDistanceChange(val)}
 							minimumValue={0}
 							maximumValue={25}
 							step={1}
 							value={this.state.distance}
 							style={styles.distanceSlider}
-							/>
+							disabled={this.state.isLoading}
+						/>
 					</View>
-					
+
 					<ScrollView>
-						<TouchableOpacity onPress={this.handleDescription}>
-              <RecomRest />
-            </TouchableOpacity>
+						<RecomRest handleDescription={this.handleDescription} />
 					</ScrollView>
-						
+
 				</View>
-					
-      </View>
-    );
-  }
+
+			</View>
+		);
+	}
 }
 
-function grabVar(state){
+function grabVar(state) {
 	return {
 		mainPage: state.Page.page,
-		mainList: state.Page.listRest
+		mainList: state.Page.listRest,
+		searchUrl: state.Page.searchUrl,
+		sortIndex: state.Page.sortIndex,
+		restList: state.Page.result
 	}
 }
 
 export default connect(grabVar)(Recommendation);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+	container: {
+		flex: 1,
 		backgroundColor: '#ffffff',
 		width: '100%',
 		height: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
-  },
+	},
 	body: {
 		flex: 1,
-    backgroundColor: '#ffffff',
+		backgroundColor: '#ffffff',
 		width: '100%',
 		height: '88%',
 	},
 	header: {
-    flexDirection: 'row',
-    backgroundColor: "#1a2e35",
+		flexDirection: 'row',
+		backgroundColor: "#1a2e35",
 		width: '100%',
 		height: '12%',
 		justifyContent: "center",
-    position: 'relative',
-    top: 0,
+		position: 'relative',
+		top: 0,
 	},
 	distanceSlider: {
-		width: 405,
-    backgroundColor: "#ffffff",
+		width: '100%',
+		backgroundColor: "#ffffff",
 	}
 });
