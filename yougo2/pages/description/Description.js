@@ -19,7 +19,8 @@ class Description extends React.Component {
 				address: '',
 				phone: '',
 				email: '',
-				description: ''
+				description: '',
+				openingHours: []
 			}
 		}
 	}
@@ -47,7 +48,7 @@ class Description extends React.Component {
 			images.push(selectedItem.photos[i].photo_reference);
 		}
 
-		fd.append("photo_references",  JSON.stringify(images));
+		fd.append("photo_references", JSON.stringify(images));
 
 		fetch(api, {
 			method: "POST",
@@ -94,7 +95,7 @@ class Description extends React.Component {
 
 	getDetails = async (selectedItem) => {
 		const id = selectedItem.place_id;
-		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,vicinity,formatted_phone_number,reviews&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
+		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,vicinity,formatted_phone_number,reviews,opening_hours,formatted_address&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
 		var resp = await fetch(searchUrl);
 		var json = await resp.json();
 		const result = json.result;
@@ -103,7 +104,8 @@ class Description extends React.Component {
 			let details = {
 				address: result.formatted_address,
 				phone: result.formatted_phone_number,
-				description: result.reviews.length > 0 ? result.reviews[0].text : 'No description'
+				description: result.reviews.length > 0 ? result.reviews[0].text : 'No description',
+				openingHours: result.opening_hours.weekday_text
 			};
 
 			this.setState({ details: details });
@@ -144,7 +146,14 @@ class Description extends React.Component {
 						</View>
 						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {this.state.details.address}</Text>
 						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Phone:</Text> {this.state.details.phone}</Text>
-						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> Change this part to Opening Hours</Text>
+						<View>
+							<Text style={styles.subTitleWrapper}>Opening Hours:</Text>
+							{
+								this.state.details.openingHours.map((hour, index) => (
+									<View style={{ flex: 1, flexDirection: "row" }} key={index}><Text style={styles.subTitle}>{hour}</Text></View>
+								))
+							}
+						</View>
 						<View style={{ alignItems: "center" }}>
 							<View
 								style={styles.descLines}
@@ -195,6 +204,7 @@ const styles = StyleSheet.create({
 		height: '88%',
 		justifyContent: 'center',
 		alignItems: 'center',
+		paddingBottom: 100
 	},
 	imgSlider: {
 		width: '100%',
@@ -211,6 +221,14 @@ const styles = StyleSheet.create({
 	},
 	subTitle: {
 		color: '#1a2e35',
+		fontSize: 14,
+		paddingBottom: 10,
+		paddingLeft: 15,
+		paddingTop: 5,
+		paddingRight: 15,
+	},
+	subTitleWrapper: {
+		fontWeight: "bold",
 		fontSize: 14,
 		paddingBottom: 10,
 		paddingLeft: 15,
