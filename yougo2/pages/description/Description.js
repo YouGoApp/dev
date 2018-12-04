@@ -159,7 +159,7 @@ class Description extends React.Component {
 								style={styles.descLines}
 							/>
 						</View>
-						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Reviews:</Text></Text>
+						<Text style={styles.subTitle}><Text style={{ fontWeight: 'bold' }}>Top Reviews:</Text></Text>
 						<Text style={{ paddingLeft: 15, paddingRight: 15 }}>{this.state.details.description}</Text>
 					</ScrollView>
 				</View>

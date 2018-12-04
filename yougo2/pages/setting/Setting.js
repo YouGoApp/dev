@@ -8,7 +8,7 @@ class Setting extends React.Component {
 
 	state = {
 		sorting: [
-			true, false, false
+			false, false, false
 		],
 		isDisabled: false
 	}
