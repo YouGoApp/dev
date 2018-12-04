@@ -6,7 +6,7 @@ export default class Loading extends React.Component {
 	componentWillMount()
 	{
 		setTimeout(()=>{
-			this.props.navigation.navigate('Preference');
+			this.props.navigation.navigate('Login');
 		}, 2000)
 	}
 
