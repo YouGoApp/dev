@@ -17,23 +17,45 @@ class Profile extends React.Component {
 		super(props);
 		this.state = {
 			image: 'http://1.bp.blogspot.com/-YLXDiM7VATc/T9rqencOPLI/AAAAAAAACRQ/VMjDWJ3wOpI/s1600/06-15-12-ardencho.jpg',
-			uploading: false
+			uploading: false,
+			histories: []
 		};
 	}
 
 	componentDidMount() {
-		console.log(this.props.user);
 		if (this.props.user.avatar) {
 			this.setState({ image: this.BASE_URL + this.props.user.avatar });
 		}
+
+		this.getUserHistories(this.props.user.username);
+	}
+
+	getUserHistories = (username) => {
+		const api = this.BASE_URL + 'getuserhistories.php';
+		const formData = new FormData();
+		formData.append('username', username);
+
+		//API that use fetch to input data to database via backend php script
+		fetch(api, {
+			method: 'POST',
+			body: formData
+		})
+			.then((response) => response.json())
+			.then((responseJson) => {
+				this.setState({ histories: responseJson });
+			})
+			.catch((error) => {
+				console.error(error);
+				alert(error.error);
+			});
 	}
 
 	handleBack = () => {
 		this.props.navigation.navigate('Recommendation')
 	}
 
-	handleDescription = () => {
-		this.props.navigation.navigate('Description')
+	handleDescription = (history) => {
+		this.props.navigation.navigate('Description', { history: history });
 	}
 
 	handleSignOut = () => {
@@ -133,30 +155,15 @@ class Profile extends React.Component {
 					</View>
 
 					<ScrollView style={styles.profRest}>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={this.handleDescription}>
-							<HistoryRest />
-						</TouchableOpacity>
+						{
+							this.state.histories.map((history, index) => {
+								return (
+									<TouchableOpacity onPress={() => this.handleDescription(history)} key={index}>
+										<HistoryRest history={history} />
+									</TouchableOpacity>
+								)
+							})
+						}
 					</ScrollView>
 				</View>
 			</View>

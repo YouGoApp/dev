@@ -21,14 +21,32 @@ class Description extends React.Component {
 				email: '',
 				description: '',
 				openingHours: []
-			}
+			},
+			name: '',
+			longitude: '',
+			latitude: ''
 		}
 	}
 
 	componentDidMount() {
-		const selectedItem = this.props.restList[this.props.selectedIndex];
-		this.getImages(selectedItem.photos);
-		this.getDetails(selectedItem);
+		const { navigation } = this.props;
+		const history = navigation.getParam('history', null);
+
+		// Come from history page
+		if (history) {
+			this.getImages(JSON.parse(history.photo_references));
+			const selectedItem = { place_id: history.place_id };
+			this.getDetails(selectedItem, false);
+			this.setState({ longitude: history.longitude, latitude: history.latitude, name: history.name });
+		} else {
+			const selectedItem = this.props.restList[this.props.selectedIndex];
+			this.getImages(selectedItem.photos);
+			this.getDetails(selectedItem, true);
+			this.setState({
+				longitude: selectedItem.geometry.location.lng,
+				latitude: selectedItem.geometry.location.lat,
+				name: selectedItem.name });
+		}
 	}
 
 	saveHistory = (selectedItem, details, place_id) => {
@@ -41,6 +59,7 @@ class Description extends React.Component {
 		fd.append("latitude", selectedItem.geometry.location.lat);
 		fd.append("longitude", selectedItem.geometry.location.lng);
 		fd.append("place_id", place_id);
+		fd.append("price", selectedItem.price_level);
 
 		let images = [];
 
@@ -67,6 +86,7 @@ class Description extends React.Component {
 	}
 
 	handleMap = (lat, lng, label) => {
+		alert(lat + ',' + lng);
 		const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
 		const latLng = `${lat},${lng}`;
 		const url = Platform.select({
@@ -74,8 +94,8 @@ class Description extends React.Component {
 			android: `${scheme}${latLng}(${label})`
 		});
 
-
-		Linking.openURL(url);
+alert(label);
+		// Linking.openURL(url);
 	}
 
 	getImages = (photos) => {
@@ -86,14 +106,20 @@ class Description extends React.Component {
 		let images = [];
 
 		for (let i = 0; i < photos.length; i++) {
-			var searchUrl = "https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&maxwidth=400&photoreference=" + photos[i].photo_reference;
+			let photoId = photos[i].photo_reference;
+
+			if (!photoId) {
+				photoId = photos[i];
+			}
+
+			var searchUrl = "https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&maxwidth=400&photoreference=" + photoId;
 			images.push(searchUrl);
 		}
 
 		this.setState({ images: images });
 	}
 
-	getDetails = async (selectedItem) => {
+	getDetails = async (selectedItem, logHistory) => {
 		const id = selectedItem.place_id;
 		var searchUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&fields=name,vicinity,formatted_phone_number,reviews,opening_hours,formatted_address&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k";
 		var resp = await fetch(searchUrl);
@@ -109,13 +135,14 @@ class Description extends React.Component {
 			};
 
 			this.setState({ details: details });
-			this.saveHistory(selectedItem, details, id);
+
+			if (logHistory) {
+				this.saveHistory(selectedItem, details, id);
+			}
 		}
 	}
 
 	render() {
-		const selectedItem = this.props.restList[this.props.selectedIndex];
-
 		return (
 			<View style={styles.container}>
 				<View style={styles.header}>
@@ -138,7 +165,7 @@ class Description extends React.Component {
 						/>
 					</View>
 					<ScrollView>
-						<Text style={styles.prefTitle}>{selectedItem.name}</Text>
+						<Text style={styles.prefTitle}>{this.state.name}</Text>
 						<View style={{ alignItems: "center" }}>
 							<View
 								style={styles.descLines}
@@ -166,7 +193,7 @@ class Description extends React.Component {
 
 				<View style={styles.footer}>
 					<View>
-						<TouchableOpacity onPress={() => this.handleMap(selectedItem.geometry.location.lat, selectedItem.geometry.location.lng, selectedItem.name)}>
+						<TouchableOpacity onPress={() => this.handleMap(this.state.longitude, this.state.latitude, this.state.name)}>
 							<Text style={styles.CTA}>Get Directions</Text>
 						</TouchableOpacity>
 					</View>
