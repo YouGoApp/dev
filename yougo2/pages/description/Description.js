@@ -86,7 +86,7 @@ class Description extends React.Component {
 	}
 
 	handleMap = (lat, lng, label) => {
-		const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+		const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'http://maps.google.com/maps?daddr=' });
 		const latLng = `${lat},${lng}`;
 		const url = Platform.select({
 			ios: `${scheme}${label}@${latLng}`,
