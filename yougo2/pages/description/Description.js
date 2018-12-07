@@ -86,7 +86,6 @@ class Description extends React.Component {
 	}
 
 	handleMap = (lat, lng, label) => {
-		alert(lat + ',' + lng);
 		const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
 		const latLng = `${lat},${lng}`;
 		const url = Platform.select({
@@ -94,8 +93,7 @@ class Description extends React.Component {
 			android: `${scheme}${latLng}(${label})`
 		});
 
-alert(label);
-		// Linking.openURL(url);
+		Linking.openURL(url);
 	}
 
 	getImages = (photos) => {
