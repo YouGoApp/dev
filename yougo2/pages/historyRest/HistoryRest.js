@@ -35,10 +35,10 @@ class HistoryRest extends React.Component {
 			<View style={styles.container}>
 				<View style={{ flexDirection: 'row' }}>
 					{
-						this.state.thumbnail && <Image
+						this.state.thumbnail ? <Image
 							style={styles.images}
 							source={{ uri: this.state.thumbnail }}
-						/>
+						/> : null
 					}
 
 					<View style={{ paddingLeft: 15 }}>
