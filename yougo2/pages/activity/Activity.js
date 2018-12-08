@@ -88,7 +88,7 @@ class Activity extends React.Component {
 			}
 		}
 
-		var searchUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&keyword=" + cuis.join(",") + "&type=restaurant&location=" + this.state.location;
+		var searchUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&keyword=" + cuis.join(",") + "&type=restaurant&location=" + this.state.location;
 		var resp = await fetch(searchUrl + "&radius=5000");
 		var json = await resp.json();
 		console.log(json.results);

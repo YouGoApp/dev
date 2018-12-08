@@ -26,7 +26,7 @@ class HistoryRest extends React.Component {
 
 		const photoIds = JSON.parse(photoReferences);
 		const firstReference = photoIds[0];
-		return "https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k&maxwidth=100&photoreference=" + firstReference;
+		return "https://maps.googleapis.com/maps/api/place/photo?key=&maxwidth=100&photoreference=" + firstReference;
 	}
 
 	render() {

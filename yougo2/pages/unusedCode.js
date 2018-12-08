@@ -20,7 +20,7 @@ import { Picker, } from 'react-native';
   componentDidMount=async()=>{
     console.log(this.props.obj.photos[0].photo_reference);
     
-    var resp = await fetch("http://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+this.props.obj.photos[0].photo_reference+"&key=AIzaSyADB35yIzQPJnk692vgv-_Iq5ORZgsWr9k");
+    var resp = await fetch("http://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+this.props.obj.photos[0].photo_reference+"&key=");
     console.log(resp.status)
 //    var json = await resp.text();
 //    console.log(json);
